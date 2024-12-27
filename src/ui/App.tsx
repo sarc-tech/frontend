@@ -1,12 +1,6 @@
-import {Wrapper} from 'ui/components/Wrapper/Wrapper';
-import {InfoButtons} from 'ui/components/InfoButtons/InfoButtons';
+import {MainPage} from 'ui/pages/main/MainPage';
+import {FC} from 'react';
 
-const App = () => {
-    return (
-        <Wrapper>
-            <InfoButtons />
-        </Wrapper>
-    );
+export const App: FC = () => {
+    return <MainPage />;
 };
-
-export default App;
