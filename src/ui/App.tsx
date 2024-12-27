@@ -1,5 +1,5 @@
-import {InfoButtons} from './components/InfoButtons';
-import {Wrapper} from './components/Wrapper';
+import {Wrapper} from 'ui/components/Wrapper/Wrapper';
+import {InfoButtons} from 'ui/components/InfoButtons/InfoButtons';
 
 const App = () => {
     return (

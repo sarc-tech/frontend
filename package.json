@@ -40,6 +40,7 @@
     "@types/react-dom": "^18.3.5",
     "ajv": "^8.17.1",
     "eslint": "^8.57.1",
+    "eslint-plugin-absolute-imports": "^0.0.3",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.4.2",

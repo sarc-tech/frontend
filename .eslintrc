@@ -1,7 +1,18 @@
 {
-    "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/prettier"],
-    "root": true,
-    "parserOptions": {
-        "project": ["./tsconfig.json"]
-    }
+  "extends": [
+    "@gravity-ui/eslint-config",
+    "@gravity-ui/eslint-config/prettier"
+  ],
+  "root": true,
+  "parserOptions": {
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "eslint-plugin-absolute-imports"
+  ],
+  "rules": {
+    "absolute-imports/only-absolute-imports": 1
+  }
 }
