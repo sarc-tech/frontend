@@ -10,14 +10,19 @@ export const MainPage: FC = () => {
             compact={false}
             menuItems={[
                 {
-                    id: 'page1',
-                    title: 'Title 1',
+                    id: 'calls',
+                    title: 'Звонки',
                     current: true,
                     icon: () => <GitHub />,
                 },
                 {
-                    id: 'page2',
-                    title: 'Title 2',
+                    id: 'search-requests',
+                    title: 'Заявки',
+                    current: false,
+                },
+                {
+                    id: 'gravity-ui-sample',
+                    title: 'Gravity UI Sample',
                     current: false,
                 },
             ]}
