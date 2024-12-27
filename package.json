@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@gravity-ui/icons": "^2.12.0",
+    "@gravity-ui/navigation": "^2.29.0",
     "@gravity-ui/uikit": "^5.31.2",
     "bem-cn-lite": "^4.1.0",
     "cra-template-gravity-ui-pure": "1.1.1",
