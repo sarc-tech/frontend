@@ -3,7 +3,7 @@ import block from 'bem-cn-lite';
 import {Button, Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import {Moon, Sun} from '@gravity-ui/icons';
 
-import 'ui/components/Wrapper/Wrapper.scss';
+import 'ui/pages/gravitysample/themewrapper/Wrapper.scss';
 
 const b = block('wrapper');
 

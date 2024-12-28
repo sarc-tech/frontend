@@ -6,7 +6,7 @@ import Storybook from 'ui/components/icons/Storybook';
 import GitHub from 'ui/components/icons/GitHub';
 import Figma from 'ui/components/icons/Figma';
 
-import 'ui/components/InfoButtons/InfoButtons.scss';
+import 'ui/pages/gravitysample/infobuttons/InfoButtons.scss';
 
 const b = block('info-buttons');
 
