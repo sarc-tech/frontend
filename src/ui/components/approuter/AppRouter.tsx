@@ -5,10 +5,15 @@ import {SearchRequestsPage} from 'ui/pages/searchrequests/SearchRequestsPage';
 import {GravitySamplePage} from 'ui/pages/gravitysample/GravitySamplePage';
 import {FC} from 'react';
 import {MainPage} from 'ui/pages/main/MainPage';
+import {SearchRequestPage} from 'ui/pages/searchrequest/SearchRequestPage';
 
 export const AppRoutes = {
     calls: '/calls',
     searchRequests: '/search-requests',
+    searchRequest: {
+        template: '/search-requests/:id',
+        new: (id: number) => `/search-requests/${id}`,
+    },
     gravitySample: '/gravity-sample',
 };
 
@@ -28,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: AppRoutes.searchRequests,
                 element: <SearchRequestsPage />,
+            },
+            {
+                path: AppRoutes.searchRequest.template,
+                element: <SearchRequestPage />,
             },
             {
                 path: AppRoutes.gravitySample,
