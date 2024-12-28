@@ -1,6 +1,6 @@
-import {MainPage} from 'ui/pages/main/MainPage';
 import {FC} from 'react';
+import {AppRouter} from 'ui/components/approuter/AppRouter';
 
 export const App: FC = () => {
-    return <MainPage />;
+    return <AppRouter />;
 };
