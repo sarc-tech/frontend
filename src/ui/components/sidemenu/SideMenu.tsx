@@ -1,8 +1,10 @@
 import {FC, ReactNode} from 'react';
+
 import {AsideHeader} from '@gravity-ui/navigation';
-import GitHub from 'ui/components/icons/GitHub';
 import {useLocation, useNavigate} from 'react-router-dom';
+
 import {AppRoutes} from 'ui/components/approuter/AppRouter';
+import GitHub from 'ui/components/icons/GitHub';
 
 type Props = {
     children: ReactNode;

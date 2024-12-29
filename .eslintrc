@@ -1,7 +1,9 @@
 {
   "extends": [
     "@gravity-ui/eslint-config",
-    "@gravity-ui/eslint-config/prettier"
+    "@gravity-ui/eslint-config/prettier",
+    "@gravity-ui/eslint-config/client",
+    "@gravity-ui/eslint-config/import-order"
   ],
   "root": true,
   "parserOptions": {
@@ -13,6 +15,7 @@
     "eslint-plugin-absolute-imports"
   ],
   "rules": {
-    "absolute-imports/only-absolute-imports": 1
+    "absolute-imports/only-absolute-imports": 1,
+    "react/react-in-jsx-scope": 0
   }
 }

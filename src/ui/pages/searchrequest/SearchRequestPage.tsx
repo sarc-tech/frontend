@@ -1,5 +1,7 @@
 import {FC} from 'react';
+
 import {useParams} from 'react-router-dom';
+
 import {SideMenu} from 'ui/components/sidemenu/SideMenu';
 
 export const SearchRequestPage: FC = () => {

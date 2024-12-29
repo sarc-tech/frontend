@@ -1,10 +1,12 @@
 import React from 'react';
-import block from 'bem-cn-lite';
-import {Button, Icon} from '@gravity-ui/uikit';
+
 import {BookOpen, CopyTransparent, ListUl, LogoTelegram} from '@gravity-ui/icons';
-import Storybook from 'ui/components/icons/Storybook';
-import GitHub from 'ui/components/icons/GitHub';
+import {Button, Icon} from '@gravity-ui/uikit';
+import block from 'bem-cn-lite';
+
 import Figma from 'ui/components/icons/Figma';
+import GitHub from 'ui/components/icons/GitHub';
+import Storybook from 'ui/components/icons/Storybook';
 
 import 'ui/pages/gravitysample/infobuttons/InfoButtons.scss';
 

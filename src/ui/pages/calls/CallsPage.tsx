@@ -1,4 +1,5 @@
 import {FC} from 'react';
+
 import {SideMenu} from 'ui/components/sidemenu/SideMenu';
 
 export const CallsPage: FC = () => {

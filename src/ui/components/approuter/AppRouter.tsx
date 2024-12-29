@@ -1,11 +1,13 @@
-import {RouterProvider, createBrowserRouter} from 'react-router-dom';
-import {ErrorPage} from 'ui/pages/error/ErrorPage';
-import {CallsPage} from 'ui/pages/calls/CallsPage';
-import {SearchRequestsPage} from 'ui/pages/searchrequests/SearchRequestsPage';
-import {GravitySamplePage} from 'ui/pages/gravitysample/GravitySamplePage';
 import {FC} from 'react';
+
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
+
+import {CallsPage} from 'ui/pages/calls/CallsPage';
+import {ErrorPage} from 'ui/pages/error/ErrorPage';
+import {GravitySamplePage} from 'ui/pages/gravitysample/GravitySamplePage';
 import {MainPage} from 'ui/pages/main/MainPage';
 import {SearchRequestPage} from 'ui/pages/searchrequest/SearchRequestPage';
+import {SearchRequestsPage} from 'ui/pages/searchrequests/SearchRequestsPage';
 
 export const AppRoutes = {
     calls: '/calls',

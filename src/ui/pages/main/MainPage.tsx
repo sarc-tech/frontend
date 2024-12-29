@@ -1,6 +1,8 @@
 import {FC} from 'react';
-import {useNavigate} from 'react-router-dom';
+
 import {Button} from '@gravity-ui/uikit';
+import {useNavigate} from 'react-router-dom';
+
 import {AppRoutes} from 'ui/components/approuter/AppRouter';
 
 export const MainPage: FC = () => {
