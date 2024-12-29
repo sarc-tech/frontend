@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { ThemeProvider } from '@gravity-ui/uikit';
 import { useUnit } from 'effector-react';
 
-import { $theme } from 'ui/components/appthemeprovider/theme';
+import { $theme } from 'ui/components/app-theme-provider/theme';
 
 export type AppProps = {
   children: ReactNode;

@@ -8,7 +8,7 @@ import { Figma } from 'ui/components/icons/Figma';
 import { GitHub } from 'ui/components/icons/GitHub';
 import { Storybook } from 'ui/components/icons/Storybook';
 
-import 'ui/pages/gravitysample/infobuttons/InfoButtons.scss';
+import 'ui/pages/gravity-sample/info-buttons/InfoButtons.scss';
 
 const b = block('info-buttons');
 

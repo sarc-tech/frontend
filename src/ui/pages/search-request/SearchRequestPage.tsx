@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { SideMenu } from 'ui/components/sidemenu/SideMenu';
+import { SideMenu } from 'ui/components/side-menu/SideMenu';
 
 export const SearchRequestPage: FC = () => {
   const { id } = useParams();

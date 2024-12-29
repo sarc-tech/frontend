@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { SideMenu } from 'ui/components/sidemenu/SideMenu';
+import { SideMenu } from 'ui/components/side-menu/SideMenu';
 
 export const CallsPage: FC = () => {
   return (

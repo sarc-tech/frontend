@@ -5,10 +5,10 @@ import { Button, Icon } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
 import { useUnit } from 'effector-react';
 
-import { $theme, DARK, LIGHT, setTheme } from 'ui/components/appthemeprovider/theme';
-import { InfoButtons } from 'ui/pages/gravitysample/infobuttons/InfoButtons';
+import { $theme, DARK, LIGHT, setTheme } from 'ui/components/app-theme-provider/theme';
+import { InfoButtons } from 'ui/pages/gravity-sample/info-buttons/InfoButtons';
 
-import 'ui/pages/gravitysample/themewrapper/Wrapper.scss';
+import 'ui/pages/gravity-sample/theme-wrapper/Wrapper.scss';
 
 const b = block('wrapper');
 

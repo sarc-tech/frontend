@@ -4,10 +4,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { CallsPage } from 'ui/pages/calls/CallsPage';
 import { ErrorPage } from 'ui/pages/error/ErrorPage';
-import { GravitySamplePage } from 'ui/pages/gravitysample/GravitySamplePage';
+import { GravitySamplePage } from 'ui/pages/gravity-sample/GravitySamplePage';
 import { MainPage } from 'ui/pages/main/MainPage';
-import { SearchRequestPage } from 'ui/pages/searchrequest/SearchRequestPage';
-import { SearchRequestsPage } from 'ui/pages/searchrequests/SearchRequestsPage';
+import { SearchRequestPage } from 'ui/pages/search-request/SearchRequestPage';
+import { SearchRequestsPage } from 'ui/pages/search-requests/SearchRequestsPage';
 
 export const AppRoutes = {
   calls: '/calls',

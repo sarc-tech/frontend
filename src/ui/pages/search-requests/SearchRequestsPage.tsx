@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { Button } from '@gravity-ui/uikit';
 import { useNavigate } from 'react-router-dom';
 
-import { AppRoutes } from 'ui/components/approuter/AppRouter';
-import { SideMenu } from 'ui/components/sidemenu/SideMenu';
+import { AppRoutes } from 'ui/components/app-router/AppRouter';
+import { SideMenu } from 'ui/components/side-menu/SideMenu';
 
 export const SearchRequestsPage: FC = () => {
   const navigate = useNavigate();
