@@ -1,10 +1,12 @@
 import { FC, ReactNode } from 'react';
 
 import { AsideHeader } from '@gravity-ui/navigation';
+import { useUnit } from 'effector-react/effector-react.mjs';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'ui/components/app-router/AppRouter';
 import { GitHub } from 'ui/components/icons/GitHub';
+import { $sideMenuCompact, setSideMenuCompact } from 'ui/components/side-menu/side-menu';
 
 type Props = {
   children: ReactNode;
@@ -29,9 +31,11 @@ const isMatchingPath = (templatePath: string, currentPath: string): boolean => {
 export const SideMenu: FC<Props> = (props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const compact = useUnit($sideMenuCompact);
   return (
     <AsideHeader
-      compact={false}
+      compact={compact}
+      onChangeCompact={setSideMenuCompact}
       menuItems={[
         {
           id: AppRoutes.calls,
