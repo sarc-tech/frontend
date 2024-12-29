@@ -1,10 +1,11 @@
 import { FC, ReactNode } from 'react';
 
-import { AsideHeader } from '@gravity-ui/navigation';
+import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
 import { useUnit } from 'effector-react/effector-react.mjs';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'ui/components/app-router/AppRouter';
+import { Figma } from 'ui/components/icons/Figma';
 import { GitHub } from 'ui/components/icons/GitHub';
 import { $sideMenuCompact, setSideMenuCompact } from 'ui/components/side-menu/side-menu';
 
@@ -57,7 +58,21 @@ export const SideMenu: FC<Props> = (props) => {
           title: 'Gravity UI Sample',
         },
       ]}
+      headerDecoration={true}
       renderContent={() => props.children}
+      renderFooter={() => {
+        return (
+          <FooterItem
+            compact={compact}
+            item={{
+              id: 'exit',
+              onItemClick: () => navigate('/'),
+              title: 'Выйти',
+              icon: () => <Figma />,
+            }}
+          />
+        );
+      }}
     />
   );
 };
