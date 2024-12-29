@@ -5,7 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { CallsPage } from 'ui/pages/calls/CallsPage';
 import { ErrorPage } from 'ui/pages/error/ErrorPage';
 import { GravitySamplePage } from 'ui/pages/gravity-sample/GravitySamplePage';
-import { MainPage } from 'ui/pages/main/MainPage';
+import { LoginPage } from 'ui/pages/login/LoginPage';
 import { SearchRequestPage } from 'ui/pages/search-request/SearchRequestPage';
 import { SearchRequestsPage } from 'ui/pages/search-requests/SearchRequestsPage';
 
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage />,
+        element: <LoginPage />,
       },
       {
         path: AppRoutes.calls,
