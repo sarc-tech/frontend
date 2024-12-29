@@ -1,7 +1,7 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
-import {AppRouter} from 'ui/components/approuter/AppRouter';
+import { AppRouter } from 'ui/components/approuter/AppRouter';
 
 export const App: FC = () => {
-    return <AppRouter />;
+  return <AppRouter />;
 };

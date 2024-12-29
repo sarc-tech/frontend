@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Moon, Sun} from '@gravity-ui/icons';
-import {Button, Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
+import { Moon, Sun } from '@gravity-ui/icons';
+import { Button, Icon, Theme, ThemeProvider } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
 
 import 'ui/pages/gravitysample/themewrapper/Wrapper.scss';
@@ -15,38 +15,38 @@ const DEFAULT_THEME = DARK;
 export const DEFAULT_BODY_CLASSNAME = `g-root g-root_theme_${DEFAULT_THEME}`;
 
 export type AppProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
 
-export const Wrapper: React.FC<AppProps> = ({children}) => {
-    const [theme, setTheme] = React.useState<Theme>(DEFAULT_THEME);
+export const Wrapper: React.FC<AppProps> = ({ children }) => {
+  const [theme, setTheme] = React.useState<Theme>(DEFAULT_THEME);
 
-    const isDark = theme === DARK;
+  const isDark = theme === DARK;
 
-    return (
-        <ThemeProvider theme={theme}>
-            <div className={b()}>
-                <div className={b('theme-button')}>
-                    <Button
-                        size="l"
-                        view="outlined"
-                        onClick={() => {
-                            setTheme(isDark ? LIGHT : DARK);
-                        }}
-                    >
-                        <Icon data={isDark ? Sun : Moon} />
-                    </Button>
-                </div>
-                <div className={b('layout')}>
-                    <div className={b('header')}>
-                        <div className={b('logo')}>
-                            <div className={b('gravity-logo', {dark: isDark})} />
-                            <div className={b('cra-logo')} />
-                        </div>
-                    </div>
-                    <div className={b('content')}>{children}</div>
-                </div>
+  return (
+    <ThemeProvider theme={theme}>
+      <div className={b()}>
+        <div className={b('theme-button')}>
+          <Button
+            size="l"
+            view="outlined"
+            onClick={() => {
+              setTheme(isDark ? LIGHT : DARK);
+            }}
+          >
+            <Icon data={isDark ? Sun : Moon} />
+          </Button>
+        </div>
+        <div className={b('layout')}>
+          <div className={b('header')}>
+            <div className={b('logo')}>
+              <div className={b('gravity-logo', { dark: isDark })} />
+              <div className={b('cra-logo')} />
             </div>
-        </ThemeProvider>
-    );
+          </div>
+          <div className={b('content')}>{children}</div>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
 };

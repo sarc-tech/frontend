@@ -1,1 +1,4 @@
-module.exports = require('@gravity-ui/prettier-config');
+module.exports = {
+  printWidth: 100,
+  singleQuote: true,
+};
