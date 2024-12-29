@@ -19,7 +19,8 @@
     "jsx": "react-jsx",
     "incremental": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "noUnusedLocals": false
   },
   "include": [
     "**/*.ts",
