@@ -1,5 +1,6 @@
 import React from 'react';
-const GitHub = (props: React.SVGProps<SVGSVGElement>) => (
+
+export const GitHub = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         width="17"
         height="16"
@@ -16,4 +17,3 @@ const GitHub = (props: React.SVGProps<SVGSVGElement>) => (
         />
     </svg>
 );
-export default GitHub;

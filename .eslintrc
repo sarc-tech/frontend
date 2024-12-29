@@ -16,6 +16,7 @@
   ],
   "rules": {
     "absolute-imports/only-absolute-imports": 1,
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "import/no-default-export": 2
   }
 }

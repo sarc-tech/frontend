@@ -1,5 +1,6 @@
 import React from 'react';
-const Storybook = (props: React.SVGProps<SVGSVGElement>) => (
+
+export const Storybook = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         width="15"
         height="16"
@@ -16,4 +17,3 @@ const Storybook = (props: React.SVGProps<SVGSVGElement>) => (
         />
     </svg>
 );
-export default Storybook;

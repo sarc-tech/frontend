@@ -1,5 +1,6 @@
 import React from 'react';
-const Figma = (props: React.SVGProps<SVGSVGElement>) => (
+
+export const Figma = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         width="16"
         height="18"
@@ -18,4 +19,3 @@ const Figma = (props: React.SVGProps<SVGSVGElement>) => (
         />
     </svg>
 );
-export default Figma;
