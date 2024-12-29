@@ -3,12 +3,23 @@ import { FC, useState } from 'react';
 import { Button, Flex, PasswordInput, Text, TextInput, spacing } from '@gravity-ui/uikit';
 import { useNavigate } from 'react-router-dom';
 
+import { apiClient } from 'app-components/api/ApiClient';
 import { AppRoutes } from 'ui/components/app-router/AppRouter';
 
 export const LoginPage: FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [loading, setLoading] = useState(false);
+  const onClickLogin = () => {
+    (async () => {
+      setLoading(true);
+      await apiClient.login(email, password);
+      setLoading(false);
+      navigate(AppRoutes.calls);
+    })();
+  };
   return (
     <Flex centerContent width="100%" minHeight="100%">
       <Flex centerContent direction="column" width="100%" maxWidth="350px">
@@ -22,8 +33,13 @@ export const LoginPage: FC = () => {
           value={password}
           onUpdate={setPassword}
         />
-        <Button className={spacing({ mt: 4 })} onClick={() => navigate(AppRoutes.calls)}>
-          Открыть личный кабинет
+        <Button
+          view="action"
+          className={spacing({ mt: 4 })}
+          onClick={onClickLogin}
+          loading={loading}
+        >
+          Войти
         </Button>
       </Flex>
     </Flex>
