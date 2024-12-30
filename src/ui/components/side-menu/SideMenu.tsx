@@ -1,13 +1,12 @@
 import { FC, ReactNode } from 'react';
 
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
-import { useUnit } from 'effector-react/effector-react.mjs';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'ui/components/app-router/AppRouter';
 import { Figma } from 'ui/components/icons/Figma';
 import { GitHub } from 'ui/components/icons/GitHub';
-import { $sideMenuCompact, setSideMenuCompact } from 'ui/components/side-menu/side-menu';
+import { useSideMenuStore } from 'ui/components/side-menu/side-menu-store';
 
 type Props = {
   children: ReactNode;
@@ -32,11 +31,11 @@ const isMatchingPath = (templatePath: string, currentPath: string): boolean => {
 export const SideMenu: FC<Props> = (props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const compact = useUnit($sideMenuCompact);
+  const sideMenuState = useSideMenuStore();
   return (
     <AsideHeader
-      compact={compact}
-      onChangeCompact={setSideMenuCompact}
+      compact={sideMenuState.compact}
+      onChangeCompact={sideMenuState.setCompact}
       menuItems={[
         {
           id: AppRoutes.calls,
@@ -63,7 +62,7 @@ export const SideMenu: FC<Props> = (props) => {
       renderFooter={() => {
         return (
           <FooterItem
-            compact={compact}
+            compact={sideMenuState.compact}
             item={{
               id: 'exit',
               onItemClick: () => navigate('/'),

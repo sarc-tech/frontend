@@ -1,15 +1,14 @@
 import { FC, ReactNode } from 'react';
 
 import { ThemeProvider } from '@gravity-ui/uikit';
-import { useUnit } from 'effector-react';
 
-import { $theme } from 'ui/components/app-theme-provider/theme';
+import { useAppThemeStore } from 'ui/components/app-theme-provider/app-theme-store';
 
 export type AppProps = {
   children: ReactNode;
 };
 
 export const AppThemeProvider: FC<AppProps> = ({ children }) => {
-  const theme = useUnit($theme);
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  const themeState = useAppThemeStore();
+  return <ThemeProvider theme={themeState.theme}>{children}</ThemeProvider>;
 };
