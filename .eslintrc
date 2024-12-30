@@ -18,6 +18,9 @@
     "absolute-imports/only-absolute-imports": 1,
     "react/react-in-jsx-scope": 0,
     "import/no-default-export": 2,
-    "@typescript-eslint/no-unused-vars": 1
+    "@typescript-eslint/no-unused-vars": 1,
+    // Отключил, чтобы в доках не принуждал указывать явно типы параметров.
+    // У нас ts, и поэтому указание типов в доках - дублирование информации.
+    "valid-jsdoc": 0
   }
 }

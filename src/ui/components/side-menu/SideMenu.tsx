@@ -3,7 +3,8 @@ import { FC, ReactNode } from 'react';
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { AppRoutes } from 'ui/components/app-router/AppRouter';
+import { useAuthStore } from 'stores/auth';
+import { AppRoutes } from 'ui/components/app-router/app-routes';
 import { Figma } from 'ui/components/icons/Figma';
 import { GitHub } from 'ui/components/icons/GitHub';
 import { useSideMenuStore } from 'ui/components/side-menu/side-menu-store';
@@ -32,6 +33,8 @@ export const SideMenu: FC<Props> = (props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const sideMenuState = useSideMenuStore();
+  const authState = useAuthStore();
+
   return (
     <AsideHeader
       compact={sideMenuState.compact}
@@ -65,7 +68,7 @@ export const SideMenu: FC<Props> = (props) => {
             compact={sideMenuState.compact}
             item={{
               id: 'exit',
-              onItemClick: () => navigate('/'),
+              onItemClick: () => authState.clearToken(),
               title: 'Выйти',
               icon: () => <Figma />,
             }}

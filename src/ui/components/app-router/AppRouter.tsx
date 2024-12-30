@@ -1,23 +1,16 @@
 import { FC } from 'react';
 
+import { Navigate } from 'react-router';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+import { ProtectedRoute } from 'ui/components/app-router/ProtectedRoute';
+import { AppRoutes } from 'ui/components/app-router/app-routes';
 import { CallsPage } from 'ui/pages/calls/CallsPage';
 import { ErrorPage } from 'ui/pages/error/ErrorPage';
 import { GravitySamplePage } from 'ui/pages/gravity-sample/GravitySamplePage';
 import { LoginPage } from 'ui/pages/login/LoginPage';
 import { SearchRequestPage } from 'ui/pages/search-request/SearchRequestPage';
 import { SearchRequestsPage } from 'ui/pages/search-requests/SearchRequestsPage';
-
-export const AppRoutes = {
-  calls: '/calls',
-  searchRequests: '/search-requests',
-  searchRequest: {
-    template: '/search-requests/:id',
-    new: (id: number) => `/search-requests/${id}`,
-  },
-  gravitySample: '/gravity-sample',
-};
 
 const router = createBrowserRouter([
   {
@@ -26,23 +19,47 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: (
+          <ProtectedRoute>
+            <Navigate to={AppRoutes.calls} />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: AppRoutes.login,
         element: <LoginPage />,
       },
       {
         path: AppRoutes.calls,
-        element: <CallsPage />,
+        element: (
+          <ProtectedRoute>
+            <CallsPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: AppRoutes.searchRequests,
-        element: <SearchRequestsPage />,
+        element: (
+          <ProtectedRoute>
+            <SearchRequestsPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: AppRoutes.searchRequest.template,
-        element: <SearchRequestPage />,
+        element: (
+          <ProtectedRoute>
+            <SearchRequestPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: AppRoutes.gravitySample,
-        element: <GravitySamplePage />,
+        element: (
+          <ProtectedRoute>
+            <GravitySamplePage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

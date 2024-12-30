@@ -7,5 +7,5 @@ interface SideMenuState {
 
 export const useSideMenuStore = create<SideMenuState>((set) => ({
   compact: false,
-  setCompact: (newValue) => set(() => ({ compact: newValue })),
+  setCompact: (compact) => set({ compact }),
 }));
