@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
-import { Button, Container } from '@gravity-ui/uikit';
+import { Container } from '@gravity-ui/uikit';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
@@ -118,6 +118,7 @@ export const SearchRequestsPage: FC = () => {
 
   const table = useTable({
     columns,
+    getRowId: (item) => item.id,
     data: searchRequests,
   });
 
@@ -126,11 +127,12 @@ export const SearchRequestsPage: FC = () => {
       <Container>
         <PageHeader>Список заявок</PageHeader>
 
-        <Table table={table} />
-
-        <Button onClick={() => navigate(AppRoutes.searchRequest.new(1))}>Заявка 1</Button>
-        <Button onClick={() => navigate(AppRoutes.searchRequest.new(2))}>Заявка 2</Button>
-        <Button onClick={() => navigate(AppRoutes.searchRequest.new(3))}>Заявка 3</Button>
+        <Table
+          table={table}
+          onRowClick={(item) => {
+            navigate(AppRoutes.searchRequest.new(item.id));
+          }}
+        />
       </Container>
     </SideMenu>
   );

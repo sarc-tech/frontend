@@ -4,7 +4,7 @@ export const AppRoutes = {
   searchRequests: '/search-requests',
   searchRequest: {
     template: '/search-requests/:id',
-    new: (id: number) => `/search-requests/${id}`,
+    new: (id: string) => `/search-requests/${id}`,
   },
   gravitySample: '/gravity-sample',
 };
