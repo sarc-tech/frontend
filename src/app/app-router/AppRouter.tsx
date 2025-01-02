@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         index: true,
         element: (
           <ProtectedRoute>
-            <Navigate to={AppRoutes.calls} />
+            <Navigate to={AppRoutes.searchRequests} />
           </ProtectedRoute>
         ),
       },

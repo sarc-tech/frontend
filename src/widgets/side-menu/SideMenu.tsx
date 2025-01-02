@@ -41,18 +41,18 @@ export const SideMenu: FC<Props> = (props) => {
       onChangeCompact={sideMenuState.setCompact}
       menuItems={[
         {
-          id: AppRoutes.calls,
-          current: isMatchingPath(AppRoutes.calls, pathname),
-          onItemClick: () => navigate(AppRoutes.calls),
-          title: 'Звонки',
-          icon: LayoutList,
-        },
-        {
           id: AppRoutes.searchRequests,
           current: isMatchingPath(AppRoutes.searchRequests, pathname),
           onItemClick: () => navigate(AppRoutes.searchRequests),
           title: 'Заявки',
           icon: DisplayPulse,
+        },
+        {
+          id: AppRoutes.calls,
+          current: isMatchingPath(AppRoutes.calls, pathname),
+          onItemClick: () => navigate(AppRoutes.calls),
+          title: 'Звонки',
+          icon: LayoutList,
         },
         {
           id: AppRoutes.gravitySample,
