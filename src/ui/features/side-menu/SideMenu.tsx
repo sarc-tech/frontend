@@ -4,10 +4,10 @@ import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
 import { Avatar } from '@gravity-ui/uikit';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAuthStore } from 'stores/auth';
 import { AppRoutes } from 'ui/components/app-router/app-routes';
 import { GitHub } from 'ui/components/icons/GitHub';
-import { useSideMenuStore } from 'ui/components/side-menu/side-menu-store';
+import { ProfilePopup, useProfilePopupState } from 'ui/features/side-menu/ProfilePopup';
+import { useSideMenuStore } from 'ui/features/side-menu/side-menu-store';
 
 type Props = {
   children: ReactNode;
@@ -33,7 +33,7 @@ export const SideMenu: FC<Props> = (props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const sideMenuState = useSideMenuStore();
-  const authState = useAuthStore();
+  const profilePopupState = useProfilePopupState();
 
   return (
     <AsideHeader
@@ -61,20 +61,31 @@ export const SideMenu: FC<Props> = (props) => {
         },
       ]}
       headerDecoration={true}
-      renderContent={() => props.children}
+      renderContent={() => (
+        <>
+          {props.children}
+          <ProfilePopup state={profilePopupState} />
+        </>
+      )}
       renderFooter={() => {
         return (
           <FooterItem
             compact={sideMenuState.compact}
             item={{
               id: 'exit',
-              onItemClick: () => authState.clearToken(),
+              onItemClick: () => {
+                profilePopupState.toggle();
+              },
               title: '', // переопределяется ниже
-              itemWrapper: (p, makeItem) => {
-                return makeItem({
-                  icon: <Avatar text={'Boris Petrov'} size="m" />,
-                  title: 'Boris Petrov',
-                });
+              itemWrapper: (_, makeItem) => {
+                return (
+                  <div ref={profilePopupState.ref}>
+                    {makeItem({
+                      icon: <Avatar text={'Boris Petrov'} size="m" />,
+                      title: 'Boris Petrov',
+                    })}
+                  </div>
+                );
               },
             }}
           />
