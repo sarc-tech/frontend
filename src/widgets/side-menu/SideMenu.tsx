@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 
-import { LayoutList } from '@gravity-ui/icons';
+import { DisplayPulse, LayoutList, LifeRing } from '@gravity-ui/icons';
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
-import { Avatar, Icon } from '@gravity-ui/uikit';
+import { Avatar } from '@gravity-ui/uikit';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
@@ -45,19 +45,21 @@ export const SideMenu: FC<Props> = (props) => {
           current: isMatchingPath(AppRoutes.calls, pathname),
           onItemClick: () => navigate(AppRoutes.calls),
           title: 'Звонки',
-          icon: () => <Icon data={LayoutList} />,
+          icon: LayoutList,
         },
         {
           id: AppRoutes.searchRequests,
           current: isMatchingPath(AppRoutes.searchRequests, pathname),
           onItemClick: () => navigate(AppRoutes.searchRequests),
           title: 'Заявки',
+          icon: DisplayPulse,
         },
         {
           id: AppRoutes.gravitySample,
           current: isMatchingPath(AppRoutes.gravitySample, pathname),
           onItemClick: () => navigate(AppRoutes.gravitySample),
           title: 'Gravity UI Sample',
+          icon: LifeRing,
         },
       ]}
       headerDecoration={true}
