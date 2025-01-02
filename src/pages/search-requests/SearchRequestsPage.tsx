@@ -3,11 +3,14 @@ import { FC } from 'react';
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
 import { Container } from '@gravity-ui/uikit';
+import block from 'bem-cn-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenu } from 'widgets/side-menu/SideMenu';
+
+import 'pages/search-requests/search-request-row.scss';
 
 interface SearchRequest {
   id: string;
@@ -113,6 +116,8 @@ const searchRequests: SearchRequest[] = [
   },
 ];
 
+const b = block('search-request-row');
+
 export const SearchRequestsPage: FC = () => {
   const navigate = useNavigate();
 
@@ -129,6 +134,7 @@ export const SearchRequestsPage: FC = () => {
 
         <Table
           table={table}
+          rowClassName={b()}
           onRowClick={(item) => {
             navigate(AppRoutes.searchRequest.new(item.id));
           }}
