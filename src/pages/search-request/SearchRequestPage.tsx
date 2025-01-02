@@ -1,14 +1,18 @@
 import { FC } from 'react';
 
+import { Container } from '@gravity-ui/uikit';
 import { useParams } from 'react-router-dom';
 
+import { PageHeader } from 'widgets/PageHeader';
 import { SideMenu } from 'widgets/side-menu/SideMenu';
 
 export const SearchRequestPage: FC = () => {
   const { id } = useParams();
   return (
     <SideMenu>
-      <h1>Заявка id: {id}</h1>
+      <Container>
+        <PageHeader>Заявка id: {id}</PageHeader>
+      </Container>
     </SideMenu>
   );
 };
