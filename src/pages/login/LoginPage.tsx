@@ -21,7 +21,7 @@ const useLogin = () => {
       try {
         const token = await apiClient.login(email, password);
         authState.setToken(token);
-      } catch (error) {
+      } catch {
         setError('Не правильный логин или пароль');
       }
       setLoading(false);
@@ -34,12 +34,12 @@ const useLogin = () => {
     password,
     formError,
     loading,
-    setEmail: (email: string) => {
-      _setEmail(email);
+    setEmail: (newEmail: string) => {
+      _setEmail(newEmail);
       setError(null);
     },
-    setPassword: (password: string) => {
-      _setPassword(password);
+    setPassword: (newPassword: string) => {
+      _setPassword(newPassword);
       setError(null);
     },
     onClickLogin,
