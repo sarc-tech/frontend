@@ -1,11 +1,11 @@
 import { FC, ReactNode } from 'react';
 
+import { LayoutList } from '@gravity-ui/icons';
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
-import { Avatar } from '@gravity-ui/uikit';
+import { Avatar, Icon } from '@gravity-ui/uikit';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
-import { GitHub } from 'widgets/icons/GitHub';
 import { ProfilePopup, useProfilePopupState } from 'widgets/side-menu/ProfilePopup';
 import { useSideMenuStore } from 'widgets/side-menu/side-menu-store';
 
@@ -45,7 +45,7 @@ export const SideMenu: FC<Props> = (props) => {
           current: isMatchingPath(AppRoutes.calls, pathname),
           onItemClick: () => navigate(AppRoutes.calls),
           title: 'Звонки',
-          icon: () => <GitHub />,
+          icon: () => <Icon data={LayoutList} />,
         },
         {
           id: AppRoutes.searchRequests,

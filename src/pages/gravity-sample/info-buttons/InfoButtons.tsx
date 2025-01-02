@@ -4,9 +4,9 @@ import { BookOpen, CopyTransparent, ListUl, LogoTelegram } from '@gravity-ui/ico
 import { Button, Icon } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
 
-import { Figma } from 'widgets/icons/Figma';
-import { GitHub } from 'widgets/icons/GitHub';
-import { Storybook } from 'widgets/icons/Storybook';
+import { Figma } from 'pages/gravity-sample/info-buttons/icons/Figma';
+import { GitHub } from 'pages/gravity-sample/info-buttons/icons/GitHub';
+import { Storybook } from 'pages/gravity-sample/info-buttons/icons/Storybook';
 
 import 'pages/gravity-sample/info-buttons/InfoButtons.scss';
 
