@@ -1,11 +1,11 @@
 import { FC, ReactNode } from 'react';
 
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
+import { Avatar } from '@gravity-ui/uikit';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from 'stores/auth';
 import { AppRoutes } from 'ui/components/app-router/app-routes';
-import { Figma } from 'ui/components/icons/Figma';
 import { GitHub } from 'ui/components/icons/GitHub';
 import { useSideMenuStore } from 'ui/components/side-menu/side-menu-store';
 
@@ -69,8 +69,13 @@ export const SideMenu: FC<Props> = (props) => {
             item={{
               id: 'exit',
               onItemClick: () => authState.clearToken(),
-              title: 'Выйти',
-              icon: () => <Figma />,
+              title: '', // переопределяется ниже
+              itemWrapper: (p, makeItem) => {
+                return makeItem({
+                  icon: <Avatar text={'Boris Petrov'} size="m" />,
+                  title: 'Boris Petrov',
+                });
+              },
             }}
           />
         );
