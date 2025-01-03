@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
 import { Wrapper } from 'pages/gravity-sample/theme-wrapper/Wrapper';
-import { SideMenu } from 'widgets/side-menu/SideMenu';
+import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 export const GravitySamplePage: FC = () => {
   return (
-    <SideMenu>
+    <SideMenuState>
       <Wrapper />
-    </SideMenu>
+    </SideMenuState>
   );
 };

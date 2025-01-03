@@ -1,11 +1,16 @@
-import { create } from 'zustand/react';
+import { action, makeAutoObservable, observable } from 'mobx';
 
-interface SideMenuState {
-  compact: boolean;
-  setCompact: (newValue: boolean) => void;
+export class SideMenuState {
+  @observable
+  compact = false;
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  @action
+  setCompact(compact: boolean) {
+    this.compact = compact;
+  }
 }
 
-export const useSideMenuStore = create<SideMenuState>((set) => ({
-  compact: false,
-  setCompact: (compact) => set({ compact }),
-}));
+export const sideMenuState = new SideMenuState();

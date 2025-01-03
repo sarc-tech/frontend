@@ -3,15 +3,15 @@ import { FC } from 'react';
 import { Container } from '@gravity-ui/uikit';
 
 import { PageHeader } from 'widgets/PageHeader';
-import { SideMenu } from 'widgets/side-menu/SideMenu';
+import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 export const CallsPage: FC = () => {
   return (
-    <SideMenu>
+    <SideMenuState>
       <Container>
         <PageHeader>Звонки</PageHeader>
         TBD
       </Container>
-    </SideMenu>
+    </SideMenuState>
   );
 };

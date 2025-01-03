@@ -1,14 +1,14 @@
 import { FC, ReactNode } from 'react';
 
 import { ThemeProvider } from '@gravity-ui/uikit';
+import { observer } from 'mobx-react-lite';
 
-import { useAppThemeStore } from 'widgets/app-theme-provider/app-theme-store';
+import { appTheme } from 'widgets/app-theme-provider/AppTheme';
 
 export type AppProps = {
   children: ReactNode;
 };
 
-export const AppThemeProvider: FC<AppProps> = ({ children }) => {
-  const themeState = useAppThemeStore();
-  return <ThemeProvider theme={themeState.theme}>{children}</ThemeProvider>;
-};
+export const AppThemeProvider: FC<AppProps> = observer(({ children }) => {
+  return <ThemeProvider theme={appTheme.theme}>{children}</ThemeProvider>;
+});

@@ -2,8 +2,9 @@ import { FC, RefObject, useRef, useState } from 'react';
 
 import { ArrowRightFromSquare } from '@gravity-ui/icons';
 import { Button, Flex, Icon, Popup, Text, User, spacing } from '@gravity-ui/uikit';
+import { observer } from 'mobx-react-lite';
 
-import { useAuthStore } from 'features/auth';
+import { authStore } from 'features/AuthStore';
 
 type ProfilePopupState = {
   ref: RefObject<Element>;
@@ -26,8 +27,7 @@ export const useProfilePopupState = () => {
   };
 };
 
-export const ProfilePopup: FC<Props> = (props) => {
-  const authState = useAuthStore();
+export const ProfilePopup: FC<Props> = observer((props) => {
   return (
     <Popup
       anchorRef={props.state.ref}
@@ -56,11 +56,11 @@ export const ProfilePopup: FC<Props> = (props) => {
           view={'flat-secondary'}
           size={'m'}
           pin={'round-round'}
-          onClick={() => authState.clearToken()}
+          onClick={() => authStore.clearToken()}
         >
           <Icon data={ArrowRightFromSquare} />
         </Button>
       </Flex>
     </Popup>
   );
-};
+});

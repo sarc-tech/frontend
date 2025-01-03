@@ -3,11 +3,12 @@ import { FC, ReactNode } from 'react';
 import { DisplayPulse, LayoutList, LifeRing } from '@gravity-ui/icons';
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
 import { Avatar } from '@gravity-ui/uikit';
+import { observer } from 'mobx-react-lite';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { ProfilePopup, useProfilePopupState } from 'widgets/side-menu/ProfilePopup';
-import { useSideMenuStore } from 'widgets/side-menu/side-menu-store';
+import { sideMenuState } from 'widgets/side-menu/side-menu-store';
 
 type Props = {
   children: ReactNode;
@@ -29,16 +30,15 @@ const isMatchingPath = (templatePath: string, currentPath: string): boolean => {
   return currentPath === templatePath || currentPath.startsWith(`${templatePath}/`);
 };
 
-export const SideMenu: FC<Props> = (props) => {
+export const SideMenuState: FC<Props> = observer((props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const sideMenuState = useSideMenuStore();
   const profilePopupState = useProfilePopupState();
 
   return (
     <AsideHeader
       compact={sideMenuState.compact}
-      onChangeCompact={sideMenuState.setCompact}
+      onChangeCompact={(compact) => sideMenuState.setCompact(compact)}
       menuItems={[
         {
           id: AppRoutes.searchRequests,
@@ -95,4 +95,4 @@ export const SideMenu: FC<Props> = (props) => {
       }}
     />
   );
-};
+});

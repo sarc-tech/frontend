@@ -1,56 +1,75 @@
 import { FC, useState } from 'react';
 
 import { Button, Flex, PasswordInput, Text, TextInput, spacing } from '@gravity-ui/uikit';
+import { action, makeAutoObservable, observable, runInAction } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import { Navigate } from 'react-router';
 
-import { useAuthStore, useUserLogged } from 'features/auth';
+import { authStore } from 'features/AuthStore';
 import { apiClient } from 'shared/api/ApiClient';
 
-const useLogin = () => {
-  const userLogged = useUserLogged();
-  const authState = useAuthStore();
-  const [email, _setEmail] = useState('');
-  const [password, _setPassword] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [loading, setLoading] = useState(false);
-  const [formError, setError] = useState<string | null>(null);
-  const onClickLogin = () => {
-    (async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const token = await apiClient.login(email, password);
-        authState.setToken(token);
-      } catch {
-        setError('Не правильный логин или пароль');
-      }
-      setLoading(false);
-    })();
-  };
+class LoginPageModel {
+  @observable
+  email = '';
 
-  return {
-    userLogged,
-    email,
-    password,
-    formError,
-    loading,
-    setEmail: (newEmail: string) => {
-      _setEmail(newEmail);
-      setError(null);
-    },
-    setPassword: (newPassword: string) => {
-      _setPassword(newPassword);
-      setError(null);
-    },
-    onClickLogin,
-  };
-};
+  @observable
+  password = '';
 
-export const LoginPage: FC = () => {
-  const { userLogged, email, password, formError, loading, setEmail, setPassword, onClickLogin } =
-    useLogin();
+  @observable
+  loading = false;
 
-  if (userLogged) {
+  @observable
+  formError: string | null = null;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  @action
+  setEmail(email: string) {
+    this.email = email;
+    this.formError = null;
+  }
+
+  @action
+  setPassword(password: string) {
+    this.password = password;
+    this.formError = null;
+  }
+
+  @action
+  setLoading(loading: boolean) {
+    this.loading = loading;
+  }
+
+  @action
+  setFormError(formError: string | null) {
+    this.formError = formError;
+  }
+
+  @action
+  async loginClicked() {
+    this.loading = true;
+    this.formError = null;
+
+    try {
+      const token = await apiClient.login(this.email, this.password);
+      authStore.setToken(token);
+    } catch {
+      runInAction(() => {
+        this.formError = 'Не правильный логин или пароль';
+      });
+    }
+    runInAction(() => {
+      this.loading = false;
+    });
+  }
+}
+
+export const LoginPage: FC = observer(() => {
+  const [model] = useState(() => new LoginPageModel());
+
+  if (authStore.isLogged) {
     return <Navigate to="/" />;
   }
 
@@ -60,29 +79,33 @@ export const LoginPage: FC = () => {
         <Text className={spacing({ mb: 4 })} variant={'header-1'}>
           Вход
         </Text>
-        <TextInput placeholder={'Email'} value={email} onUpdate={setEmail} />
+        <TextInput
+          placeholder={'Email'}
+          value={model.email}
+          onUpdate={model.setEmail.bind(model)}
+        />
         <PasswordInput
           placeholder={'Пароль'}
           className={spacing({ mt: 2 })}
-          value={password}
-          onUpdate={setPassword}
+          value={model.password}
+          onUpdate={model.setPassword.bind(model)}
         />
-        {formError !== null && (
+        {model.formError !== null && (
           <Text color={'danger'} className={spacing({ my: 1 })}>
-            {formError}
+            {model.formError}
           </Text>
         )}
         <Button
           view="action"
           type="submit"
           className={spacing({ mt: 4 })}
-          onClick={onClickLogin}
-          loading={loading}
-          disabled={email.length === 0 || password.length === 0}
+          onClick={model.loginClicked.bind(model)}
+          loading={model.loading}
+          disabled={model.email.length === 0 || model.password.length === 0}
         >
           Войти
         </Button>
       </Flex>
     </Flex>
   );
-};
+});

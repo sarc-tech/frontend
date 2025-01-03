@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { PageHeader } from 'widgets/PageHeader';
-import { SideMenu } from 'widgets/side-menu/SideMenu';
+import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 import 'pages/search-requests/search-request-row.scss';
 
@@ -128,7 +128,7 @@ export const SearchRequestsPage: FC = () => {
   });
 
   return (
-    <SideMenu>
+    <SideMenuState>
       <Container>
         <PageHeader>Список заявок</PageHeader>
 
@@ -140,6 +140,6 @@ export const SearchRequestsPage: FC = () => {
           }}
         />
       </Container>
-    </SideMenu>
+    </SideMenuState>
   );
 };
