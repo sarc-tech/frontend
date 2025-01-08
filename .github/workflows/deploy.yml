@@ -11,14 +11,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22.x
       - name: Install NPM dependencies
         run: npm ci
 
@@ -30,5 +27,5 @@ jobs:
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
           secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
           bucketName: ${{ secrets.BUCKET }}
-          sourceDir: ./dist
+          sourceDir: ./build
           clear: true
