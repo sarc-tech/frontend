@@ -30,3 +30,4 @@ jobs:
           bucketName: ${{ secrets.BUCKET }}
           sourceDir: ./build
           clear: true
+          includeDots: false
