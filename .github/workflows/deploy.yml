@@ -22,6 +22,7 @@ jobs:
       - name: Build application
         run: npm run build
 
+      # Docs: https://github.com/marketplace/actions/yandex-cloud-object-storage-upload-s3
       - uses: MrMeison/yc-object-storage-action@main
         with:
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
