@@ -1,9 +1,9 @@
 name: Deploy Stage to Yandex S3
 on:
-#  push:
-#    branches:
+  push:
+    branches:
 #      - master
-#      - add-ci-deploy # TODO dont forget remove
+      - add-ci-deploy # TODO dont forget remove
 
   # Run manually from any branch
   workflow_dispatch: {}
