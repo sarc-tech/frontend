@@ -130,7 +130,7 @@ export const SearchRequestsPage: FC = () => {
   return (
     <SideMenuState>
       <Container>
-        <PageHeader>Список заявок TEST CI</PageHeader>
+        <PageHeader>Список заявок</PageHeader>
 
         <Table
           table={table}
