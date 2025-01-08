@@ -4,8 +4,9 @@ on:
 #    branches:
 #      - master
 #      - add-ci-deploy # TODO dont forget remove
-  workflow_dispatch:
-    inputs: {}
+
+  # Run manually from any branch
+  workflow_dispatch: {}
 
 jobs:
   deploy:
