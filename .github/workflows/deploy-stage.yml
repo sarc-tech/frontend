@@ -1,11 +1,11 @@
 name: Deploy Stage to Yandex S3
 on:
+  # Деплоим стейдж при пуше в мастер
   push:
     branches:
-#      - master
-      - add-ci-deploy # TODO dont forget remove
+      - master
 
-  # Run manually from any branch
+  # А также разрешаем вручную запустить из любой ветки
   workflow_dispatch: {}
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
       - name: Build application
         run: npm run build
 
-      # Docs: https://github.com/marketplace/actions/yandex-cloud-object-storage-upload-s3
+      # Дока по экшну: https://github.com/marketplace/actions/yandex-cloud-object-storage-upload-s3
       - uses: MrMeison/yc-object-storage-action@main
         with:
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
