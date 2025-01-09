@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Система координации поиска и спасения (SARC) - OpenAPI 3.0
+  description: |-
+    Пример описания схемы MVP
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Incidents
+    description: Работа с заявками
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /incidents:
+    x-ogen-operation-group: Incidents
+    put:
+      tags:
+        - incidents
+      summary: Обновление существующей заявки
+      description: Update an existing incidents by Id
+      operationId: updateIncidents
+      requestBody:
+        description: Update an existent incidents in the system
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Incidents'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Incidents'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incidents'
+        '400':
+          description: Ошибочный ID заявки
+        '404':
+          description: Заявка не найдена
+        '422':
+          description: Validation exception
+    post:
+      tags:
+        - incidents
+      summary: добавление новой заявки
+      description: Add a new incidents
+      operationId: addIncidents
+      requestBody:
+        description: Add a new incidents
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Incidents'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Incidents'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incidents'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Incidents'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+    get:
+      tags:
+        - incidents
+      summary: получение списка заявок
+      description: list of incidents
+      operationId: getIncidents
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentsResponse'
+        '400':
+          description: Invalid value
+  /incidents/{incidentId}:
+    x-ogen-operation-group: Incidents
+    get:
+      tags:
+        - incidents
+      summary: получение заявки по id
+      description: Returns a single incidents
+      operationId: getIncidentById
+      parameters:
+        - name: incidentId
+          in: path
+          description: ID of Incidents to return
+          required: true
+          schema:
+            type: string
+            description: incident id
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Incidents'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Incidents'
+        '400':
+          description: Invalid ID 
+        '404':
+          description: Incidents not found
+
+    delete:
+      tags:
+        - incidents
+      summary: Deletes an incidents
+      description: delete an incidents
+      operationId: deleteIncident
+      parameters:
+        - name: incidentId
+          in: path
+          description: request id to delete
+          required: true
+          schema:
+            type: string
+            description: incident id
+      responses:
+        '400':
+          description: Invalid value
+components:
+  schemas:
+    Incidents:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          example: 123
+          description: incident id
+        region:
+          type: string
+          example: Московская обл.
+        fio:
+          type: string
+          example: Иванов Иван Иванович
+        status:
+          type: string
+          example: новая
+        date:
+          type: string
+          format: DateTime
+          example: '2024-12-19T17:01:39.000Z'
+    IncidentsResponse:
+      type: object
+      properties:
+        trackingId:
+          type: string
+        status:
+          type: string
+          default: Ok
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Incidents"
