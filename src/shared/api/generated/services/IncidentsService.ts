@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Incidents } from '../models/Incidents';
+import type { Incident } from '../models/Incident';
 import type { IncidentsResponse } from '../models/IncidentsResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -12,12 +12,12 @@ export class IncidentsService {
    * Обновление существующей заявки
    * Update an existing incidents by Id
    * @param requestBody Update an existent incidents in the system
-   * @returns Incidents Successful operation
+   * @returns Incident Successful operation
    * @throws ApiError
    */
   public static updateIncidents(
-    requestBody: Incidents,
-  ): CancelablePromise<Incidents> {
+    requestBody: Incident,
+  ): CancelablePromise<Incident> {
     return __request(OpenAPI, {
       method: 'PUT',
       url: '/incidents',
@@ -34,12 +34,12 @@ export class IncidentsService {
    * добавление новой заявки
    * Add a new incidents
    * @param requestBody Add a new incidents
-   * @returns Incidents Successful operation
+   * @returns Incident Successful operation
    * @throws ApiError
    */
   public static addIncidents(
-    requestBody: Incidents,
-  ): CancelablePromise<Incidents> {
+    requestBody: Incident,
+  ): CancelablePromise<Incident> {
     return __request(OpenAPI, {
       method: 'POST',
       url: '/incidents',
@@ -70,12 +70,12 @@ export class IncidentsService {
    * получение заявки по id
    * Returns a single incidents
    * @param incidentId ID of Incidents to return
-   * @returns Incidents successful operation
+   * @returns Incident successful operation
    * @throws ApiError
    */
   public static getIncidentById(
     incidentId: string,
-  ): CancelablePromise<Incidents> {
+  ): CancelablePromise<Incident> {
     return __request(OpenAPI, {
       method: 'GET',
       url: '/incidents/{incidentId}',

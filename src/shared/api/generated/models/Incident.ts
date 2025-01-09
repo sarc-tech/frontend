@@ -2,14 +2,14 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type Incidents = {
+export type Incident = {
   /**
    * incident id
    */
-  id?: string;
-  region?: string;
-  fio?: string;
-  status?: string;
-  date?: string;
+  id: string;
+  region: string;
+  fio: string;
+  status: string;
+  date: string;
 };
 

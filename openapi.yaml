@@ -37,10 +37,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Incidents'
+              $ref: '#/components/schemas/Incident'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Incidents'
+              $ref: '#/components/schemas/Incident'
         required: true
       responses:
         '200':
@@ -48,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Incidents'
+                $ref: '#/components/schemas/Incident'
         '400':
           description: Ошибочный ID заявки
         '404':
@@ -66,10 +66,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Incidents'
+              $ref: '#/components/schemas/Incident'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Incidents'
+              $ref: '#/components/schemas/Incident'
         required: true
       responses:
         '200':
@@ -77,10 +77,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Incidents'
+                $ref: '#/components/schemas/Incident'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Incidents'
+                $ref: '#/components/schemas/Incident'
         '400':
           description: Invalid input
         '422':
@@ -122,10 +122,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Incidents'
+                $ref: '#/components/schemas/Incident'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Incidents'
+                $ref: '#/components/schemas/Incident'
         '400':
           description: Invalid ID 
         '404':
@@ -150,9 +150,13 @@ paths:
           description: Invalid value
 components:
   schemas:
-    Incidents:
+    Incident:
       required:
-        - name
+        - id
+        - region
+        - fio
+        - status
+        - date
       type: object
       properties:
         id:
@@ -183,4 +187,4 @@ components:
         data:
           type: array
           items:
-            $ref: "#/components/schemas/Incidents"
+            $ref: "#/components/schemas/Incident"
