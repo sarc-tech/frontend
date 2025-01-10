@@ -1,3 +1,4 @@
+import { CancelablePromise, IncidentsResponse, IncidentsService } from 'shared/api/generated';
 import { sleep } from 'shared/utils/promiseUtils';
 
 class ApiClient {
@@ -7,6 +8,10 @@ class ApiClient {
       return 'token-example-for-user-ivan';
     }
     throw new Error('Password wrong');
+  }
+
+  getIncidents(): CancelablePromise<IncidentsResponse> {
+    return IncidentsService.getIncidents();
   }
 }
 
