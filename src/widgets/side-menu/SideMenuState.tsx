@@ -58,7 +58,7 @@ export const SideMenuState: FC<Props> = observer((props) => {
           id: AppRoutes.statuses,
           current: isMatchingPath(AppRoutes.statuses, pathname),
           onItemClick: () => navigate(AppRoutes.statuses),
-          title: 'Звонки',
+          title: 'Статусы',
           icon: LayoutList,
         },
         {
