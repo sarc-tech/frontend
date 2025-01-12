@@ -9,5 +9,10 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { Incident } from './models/Incident';
 export type { IncidentsResponse } from './models/IncidentsResponse';
+export type { Status } from './models/Status';
+export type { StatususResponse } from './models/StatususResponse';
+export type { User } from './models/User';
 
 export { IncidentsService } from './services/IncidentsService';
+export { StatusesService } from './services/StatusesService';
+export { UsersService } from './services/UsersService';

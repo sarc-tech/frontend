@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
@@ -7,31 +7,28 @@ import block from 'bem-cn-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
+import { IncidentsService } from 'shared/api/generated';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 import 'pages/search-requests/search-request-row.scss';
-
-interface SearchRequest {
+interface Incident {
   id: string;
   region: string;
-  full_name: string;
-  age: number;
-  time_of_lost: string;
-  status: string;
-  create_time: string;
+  fio: string;
+  statusId: string;
+  date: string;
 }
 
-const columns: ColumnDef<SearchRequest>[] = [
+const columns: ColumnDef<Incident>[] = [
   { accessorKey: 'id', header: 'ID', size: 50 },
   { accessorKey: 'region', header: 'Регион', size: 150 },
-  { accessorKey: 'full_name', header: 'ФИО', size: 200 },
-  { accessorKey: 'age', header: 'Возраст', size: 100 },
-  { accessorKey: 'time_of_lost', header: 'Дата пропажи', size: 150 },
-  { accessorKey: 'status', header: 'Статус', size: 150 },
-  { accessorKey: 'create_time', header: 'Заявка поступила', size: 200 },
+  { accessorKey: 'fio', header: 'ФИО', size: 200 },
+  { accessorKey: 'statusId', header: 'Статус', size: 150 },
+  { accessorKey: 'date', header: 'Заявка поступила', size: 200 },
 ];
 
+/*
 const searchRequests: SearchRequest[] = [
   {
     id: '8501',
@@ -115,11 +112,20 @@ const searchRequests: SearchRequest[] = [
     create_time: '19.10.2024 в 16:30\n8509',
   },
 ];
+*/
 
 const b = block('search-request-row');
 
 export const SearchRequestsPage: FC = () => {
   const navigate = useNavigate();
+
+  const [searchRequests, setSearchRequests] = useState<Incident[]>([]);
+
+  useEffect(() => {
+    IncidentsService.getIncidents().then((res) => {
+      setSearchRequests(res.data);
+    });
+  }, []);
 
   const table = useTable({
     columns,

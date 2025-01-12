@@ -1,0 +1,7 @@
+$block: '.status-row';
+
+#{$block} {
+  &:hover {
+    background: var(--g-color-base-generic-hover);
+  }
+}

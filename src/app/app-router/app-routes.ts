@@ -6,5 +6,10 @@ export const AppRoutes = {
     template: '/search-requests/:id',
     new: (id: string) => `/search-requests/${id}`,
   },
+  statuses: '/statuses',
+  status: {
+    template: '/statuses/:id',
+    new: (id: string) => `/statuses/${id}`,
+  },
   gravitySample: '/gravity-sample',
 };

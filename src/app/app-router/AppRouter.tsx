@@ -11,6 +11,8 @@ import { GravitySamplePage } from 'pages/gravity-sample/GravitySamplePage';
 import { LoginPage } from 'pages/login/LoginPage';
 import { SearchRequestPage } from 'pages/search-request/SearchRequestPage';
 import { SearchRequestsPage } from 'pages/search-requests/SearchRequestsPage';
+import { StatusPage } from 'pages/status/StatusPage';
+import { StatusesPage } from 'pages/statuses/StatusesPage';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <SearchRequestPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: AppRoutes.statuses,
+        element: (
+          <ProtectedRoute>
+            <StatusesPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: AppRoutes.status.template,
+        element: (
+          <ProtectedRoute>
+            <StatusPage />
           </ProtectedRoute>
         ),
       },

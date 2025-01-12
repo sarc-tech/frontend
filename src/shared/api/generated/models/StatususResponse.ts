@@ -2,12 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Incident } from './Incident';
 import type { Status } from './Status';
-export type IncidentsResponse = {
+export type StatususResponse = {
     trackingId: string;
     status: string;
-    data: Array<Incident>;
-    statuses?: Array<Status>;
+    data: Array<Status>;
 };
 
