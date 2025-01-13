@@ -14,6 +14,7 @@ export type { Incident } from './models/Incident';
 export type { IncidentsResponse } from './models/IncidentsResponse';
 export type { Status } from './models/Status';
 export type { StatususResponse } from './models/StatususResponse';
+export type { Token } from './models/Token';
 export type { User } from './models/User';
 
 export { IncidentsService } from './services/IncidentsService';

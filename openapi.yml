@@ -9,12 +9,12 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.4
+  version: 0.0.9
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: https://bbasntee4s9pbtmrrvb1.containers.yandexcloud.net 
+  - url: https://bbasntee4s9pbtmrrvb1.containers.yandexcloud.net
   - url: http://localhost:8082
 tags:
   - name: statuses
@@ -130,7 +130,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Status'
         '400':
-          description: Invalid ID 
+          description: Invalid ID
         '404':
           description: Incidents not found
 
@@ -153,10 +153,10 @@ paths:
           description: successful operation
         '400':
           description: Invalid value
-          
-          
-          
-          
+
+
+
+
   /incidents:
     x-ogen-operation-group: Incidents
     put:
@@ -260,7 +260,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Incident'
         '400':
-          description: Invalid ID 
+          description: Invalid ID
         '404':
           description: Incidents not found
 
@@ -299,12 +299,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: Invalid user 
+          description: Invalid user
         '404':
           description: user not found
   /checksms:
     x-ogen-operation-group: Users
-    get:
+    post:
       tags:
         - users
       summary: Получение токена
@@ -312,33 +312,33 @@ paths:
       operationId: CheckSms
       parameters:
         - name: phone
-          in: header
+          in: query
           description: phone of user
           required: true
           schema:
             type: string
             description: phone
         - name: sms
-          in: header
+          in: query
           description: sms
           required: true
           schema:
             type: string
-            description: sms     
+            description: sms
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Token'
         '400':
-          description: Invalid param 
+          description: Invalid param
         '404':
-          description: check error 
-  /sendsms:
+          description: check error
+  /sendsms/{phone}:
     x-ogen-operation-group: Users
-    get:
+    post:
       tags:
         - users
       summary: Отправка СМС
@@ -346,7 +346,7 @@ paths:
       operationId: SendSms
       parameters:
         - name: phone
-          in: header
+          in: path
           description: phone of user
           required: true
           schema:
@@ -356,24 +356,24 @@ paths:
         '200':
           description: successful operation
         '400':
-          description: Invalid param 
+          description: Invalid param
         '404':
-          description: check error 
+          description: check error
   /logout:
     x-ogen-operation-group: Users
-    get:
+    post:
       tags:
         - users
       summary: Выход из акаунта
-      description: Удаляет сессию пользователя 
+      description: Удаляет сессию пользователя
       operationId: Logout
       responses:
         '200':
           description: successful operation
         '400':
-          description: Invalid param 
+          description: Invalid param
         '404':
-          description: check error 
+          description: check error
 components:
   schemas:
     Status:
@@ -448,6 +448,15 @@ components:
         role:
           type: string
           example: Admin
+    Token:
+      required:
+        - token
+      type: object
+      properties:
+        token:
+          type: string
+          example: 123
+          description: token
     IncidentsResponse:
       required:
         - trackingId
@@ -464,3 +473,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Incident"
+        statuses:
+          type: array
+          items:
+            $ref: "#/components/schemas/Status"

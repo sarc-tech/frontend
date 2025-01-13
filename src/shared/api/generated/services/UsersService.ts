@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { Token } from '../models/Token';
 import type { User } from '../models/User';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -28,17 +29,17 @@ export class UsersService {
    * Returns a token
    * @param phone phone of user
    * @param sms sms
-   * @returns string successful operation
+   * @returns Token successful operation
    * @throws ApiError
    */
   public checkSms(
     phone: string,
     sms: string,
-  ): CancelablePromise<string> {
+  ): CancelablePromise<Token> {
     return this.httpRequest.request({
-      method: 'GET',
+      method: 'POST',
       url: '/checksms',
-      headers: {
+      query: {
         'phone': phone,
         'sms': sms,
       },
@@ -59,9 +60,9 @@ export class UsersService {
     phone: string,
   ): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
-      url: '/sendsms',
-      headers: {
+      method: 'POST',
+      url: '/sendsms/{phone}',
+      path: {
         'phone': phone,
       },
       errors: {
@@ -78,7 +79,7 @@ export class UsersService {
    */
   public logout(): CancelablePromise<any> {
     return this.httpRequest.request({
-      method: 'GET',
+      method: 'POST',
       url: '/logout',
       errors: {
         400: `Invalid param`,
