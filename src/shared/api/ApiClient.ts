@@ -11,4 +11,5 @@ class SarcApiClient extends GeneratedSarcApiClient {
   }
 }
 
+// TODO перенести создание в DI
 export const apiClient = new SarcApiClient();
