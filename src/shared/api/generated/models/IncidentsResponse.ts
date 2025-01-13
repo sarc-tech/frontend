@@ -4,8 +4,8 @@
 /* eslint-disable */
 import type { Incident } from './Incident';
 export type IncidentsResponse = {
-  trackingId?: string;
-  status?: string;
-  data?: Array<Incident>;
+  trackingId: string;
+  status: string;
+  data: Array<Incident>;
 };
 

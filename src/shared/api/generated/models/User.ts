@@ -2,14 +2,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type Incident = {
+export type User = {
   /**
    * incident id
    */
   id: string;
-  region: string;
   fio: string;
-  statusId: string;
-  date: string;
+  role: string;
 };
 

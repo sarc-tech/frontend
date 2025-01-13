@@ -2,47 +2,47 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Incident } from '../models/Incident';
-import type { IncidentsResponse } from '../models/IncidentsResponse';
+import type { Status } from '../models/Status';
+import type { StatususResponse } from '../models/StatususResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
-export class IncidentsService {
+export class StatusesService {
   /**
-   * Обновление существующей заявки
-   * Update an existing incidents by Id
-   * @param requestBody Update an existent incidents in the system
-   * @returns Incident Successful operation
+   * Обновление существующего статуса
+   * Update an existing status by Id
+   * @param requestBody Update an existent status in the system
+   * @returns Status Successful operation
    * @throws ApiError
    */
-  public static updateIncidents(
-    requestBody: Incident,
-  ): CancelablePromise<Incident> {
+  public static updateStatus(
+    requestBody: Status,
+  ): CancelablePromise<Status> {
     return __request(OpenAPI, {
       method: 'PUT',
-      url: '/incidents',
+      url: '/statuses',
       body: requestBody,
       mediaType: 'application/json',
       errors: {
-        400: `Ошибочный ID заявки`,
-        404: `Заявка не найдена`,
+        400: `Ошибочный ID статуса`,
+        404: `Статус не найден`,
         422: `Validation exception`,
       },
     });
   }
   /**
    * добавление новой заявки
-   * Add a new incidents
-   * @param requestBody Add a new incidents
-   * @returns Incident Successful operation
+   * Add a new status
+   * @param requestBody Add a new status
+   * @returns Status Successful operation
    * @throws ApiError
    */
-  public static addIncidents(
-    requestBody: Incident,
-  ): CancelablePromise<Incident> {
+  public static addStatus(
+    requestBody: Status,
+  ): CancelablePromise<Status> {
     return __request(OpenAPI, {
       method: 'POST',
-      url: '/incidents',
+      url: '/statuses',
       body: requestBody,
       mediaType: 'application/json',
       errors: {
@@ -53,14 +53,14 @@ export class IncidentsService {
   }
   /**
    * получение списка заявок
-   * list of incidents
-   * @returns IncidentsResponse successful operation
+   * list of statuses
+   * @returns StatususResponse successful operation
    * @throws ApiError
    */
-  public static getIncidents(): CancelablePromise<IncidentsResponse> {
+  public static getStatuses(): CancelablePromise<StatususResponse> {
     return __request(OpenAPI, {
       method: 'GET',
-      url: '/incidents',
+      url: '/statuses',
       errors: {
         400: `Invalid value`,
       },
@@ -69,18 +69,18 @@ export class IncidentsService {
   /**
    * получение заявки по id
    * Returns a single incidents
-   * @param incidentId ID of Incidents to return
-   * @returns Incident successful operation
+   * @param statusId ID of Status to return
+   * @returns Status successful operation
    * @throws ApiError
    */
-  public static getIncidentById(
-    incidentId: string,
-  ): CancelablePromise<Incident> {
+  public static getStatusById(
+    statusId: string,
+  ): CancelablePromise<Status> {
     return __request(OpenAPI, {
       method: 'GET',
-      url: '/incidents/{incidentId}',
+      url: '/statuses/{statusId}',
       path: {
-        'incidentId': incidentId,
+        'statusId': statusId,
       },
       errors: {
         400: `Invalid ID`,
@@ -89,20 +89,20 @@ export class IncidentsService {
     });
   }
   /**
-   * Deletes an incidents
-   * delete an incidents
-   * @param incidentId request id to delete
+   * Deletes an status
+   * delete an status
+   * @param statusId request id to delete
    * @returns any successful operation
    * @throws ApiError
    */
-  public static deleteIncident(
-    incidentId: string,
+  public static deleteStatus(
+    statusId: string,
   ): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: 'DELETE',
-      url: '/incidents/{incidentId}',
+      url: '/statuses/{statusId}',
       path: {
-        'incidentId': incidentId,
+        'statusId': statusId,
       },
       errors: {
         400: `Invalid value`,
