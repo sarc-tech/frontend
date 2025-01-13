@@ -17,7 +17,7 @@ export class GeneratedSarcApiClient {
   constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? 'https://bbasntee4s9pbtmrrvb1.containers.yandexcloud.net',
-      VERSION: config?.VERSION ?? '0.0.6',
+      VERSION: config?.VERSION ?? '0.0.4',
       WITH_CREDENTIALS: config?.WITH_CREDENTIALS ?? false,
       CREDENTIALS: config?.CREDENTIALS ?? 'include',
       TOKEN: config?.TOKEN,

@@ -21,7 +21,7 @@ export type OpenAPIConfig = {
 
 export const OpenAPI: OpenAPIConfig = {
   BASE: 'https://bbasntee4s9pbtmrrvb1.containers.yandexcloud.net',
-  VERSION: '0.0.6',
+  VERSION: '0.0.4',
   WITH_CREDENTIALS: false,
   CREDENTIALS: 'include',
   TOKEN: undefined,
