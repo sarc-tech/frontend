@@ -8,7 +8,9 @@ export const useEffectAsync = (
   destructor?: () => void,
 ) => {
   useEffect(() => {
+    // noinspection JSIgnoredPromiseFromCall
     effect();
     return destructor;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 };
