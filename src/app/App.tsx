@@ -1,8 +1,7 @@
 import { FC } from 'react';
 
-import { ToasterComponent, ToasterProvider } from '@gravity-ui/uikit';
-
 import { AppRouter } from 'app/app-router/AppRouter';
+import { ToasterServiceProvider } from 'features/toaster/ToasterServiceProvider';
 import { AppThemeProvider } from 'widgets/app-theme-provider/AppThemeProvider';
 
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -12,10 +11,9 @@ import 'app/global-styles/globals.scss';
 export const App: FC = () => {
   return (
     <AppThemeProvider>
-      <ToasterProvider>
+      <ToasterServiceProvider>
         <AppRouter />
-        <ToasterComponent />
-      </ToasterProvider>
+      </ToasterServiceProvider>
     </AppThemeProvider>
   );
 };

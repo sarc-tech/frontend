@@ -2,11 +2,12 @@ import { FC, useState } from 'react';
 
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
-import { Container, useToaster } from '@gravity-ui/uikit';
+import { Container } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
+import { toasterService } from 'features/toaster/ToasterService';
 import { apiClient } from 'shared/api/ApiClient';
 import { ApiError, Status } from 'shared/api/generated';
 import { errorTracker } from 'shared/error-reporter/ErrorReporter';
@@ -32,7 +33,6 @@ export const StatusesPage: FC = () => {
   const navigate = useNavigate();
 
   const [statuses, setStatuses] = useState<Status[]>([]);
-  const toaster = useToaster();
 
   useEffectAsync(async () => {
     try {
@@ -40,7 +40,7 @@ export const StatusesPage: FC = () => {
       setStatuses(statusesResponse.data);
     } catch (error) {
       if (error instanceof ApiError) {
-        toaster.add({
+        toasterService.add({
           name: `error-server-response-${error.status}`,
           title: 'Некорректный ответ от сервера',
           content: `HTTP ${error.status} ${error.statusText}`,
@@ -48,7 +48,7 @@ export const StatusesPage: FC = () => {
         });
       } else {
         const errorDescription = String(error);
-        toaster.add({
+        toasterService.add({
           name: `unknown-error:${errorDescription}`,
           title: 'Неизвестная ошибка',
           content: errorDescription,
