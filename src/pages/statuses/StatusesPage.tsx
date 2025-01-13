@@ -8,56 +8,51 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { apiClient } from 'shared/api/ApiClient';
+import { Status } from 'shared/api/generated';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
-import 'pages/search-requests/search-request-row.scss';
+import 'pages/statuses/status-row.scss';
 
-interface Incident {
+interface Statuses {
   id: string;
-  region: string;
-  fio: string;
-  statusId: string;
-  date: string;
+  name: string;
 }
 
-const columns: ColumnDef<Incident>[] = [
+const columns: ColumnDef<Statuses>[] = [
   { accessorKey: 'id', header: 'ID', size: 50 },
-  { accessorKey: 'region', header: 'Регион', size: 150 },
-  { accessorKey: 'fio', header: 'ФИО', size: 200 },
-  { accessorKey: 'statusId', header: 'Статус', size: 150 },
-  { accessorKey: 'date', header: 'Заявка поступила', size: 200 },
+  { accessorKey: 'name', header: 'Значение', size: 150 },
 ];
 
-const b = block('search-request-row');
+const b = block('status-row');
 
-export const SearchRequestsPage: FC = () => {
+export const StatusesPage: FC = () => {
   const navigate = useNavigate();
 
-  const [searchRequests, setSearchRequests] = useState<Incident[]>([]);
+  const [statuses, setStatuses] = useState<Status[]>([]);
 
   useEffect(() => {
-    apiClient.incidents.getIncidents().then((res) => {
-      setSearchRequests(res.data);
+    apiClient.statuses.getStatuses().then((res) => {
+      setStatuses(res.data);
     });
   }, []);
 
   const table = useTable({
     columns,
     getRowId: (item) => item.id,
-    data: searchRequests,
+    data: statuses,
   });
 
   return (
     <SideMenuState>
       <Container>
-        <PageHeader>Список заявок</PageHeader>
+        <PageHeader>Список статусов</PageHeader>
 
         <Table
           table={table}
           rowClassName={b()}
           onRowClick={(item) => {
-            navigate(AppRoutes.searchRequest.new(item.id));
+            navigate(AppRoutes.status.new(item.id));
           }}
         />
       </Container>
