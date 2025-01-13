@@ -5,9 +5,9 @@
 import type { Incident } from '../models/Incident';
 import type { IncidentsResponse } from '../models/IncidentsResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class IncidentsService {
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
    * Обновление существующей заявки
    * Update an existing incidents by Id
@@ -15,10 +15,10 @@ export class IncidentsService {
    * @returns Incident Successful operation
    * @throws ApiError
    */
-  public static updateIncidents(
+  public updateIncidents(
     requestBody: Incident,
   ): CancelablePromise<Incident> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'PUT',
       url: '/incidents',
       body: requestBody,
@@ -37,10 +37,10 @@ export class IncidentsService {
    * @returns Incident Successful operation
    * @throws ApiError
    */
-  public static addIncidents(
+  public addIncidents(
     requestBody: Incident,
   ): CancelablePromise<Incident> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'POST',
       url: '/incidents',
       body: requestBody,
@@ -57,8 +57,8 @@ export class IncidentsService {
    * @returns IncidentsResponse successful operation
    * @throws ApiError
    */
-  public static getIncidents(): CancelablePromise<IncidentsResponse> {
-    return __request(OpenAPI, {
+  public getIncidents(): CancelablePromise<IncidentsResponse> {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/incidents',
       errors: {
@@ -73,10 +73,10 @@ export class IncidentsService {
    * @returns Incident successful operation
    * @throws ApiError
    */
-  public static getIncidentById(
+  public getIncidentById(
     incidentId: string,
   ): CancelablePromise<Incident> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/incidents/{incidentId}',
       path: {
@@ -95,10 +95,10 @@ export class IncidentsService {
    * @returns any successful operation
    * @throws ApiError
    */
-  public static deleteIncident(
+  public deleteIncident(
     incidentId: string,
   ): CancelablePromise<any> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'DELETE',
       url: '/incidents/{incidentId}',
       path: {

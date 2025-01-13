@@ -30,7 +30,7 @@
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
     "lint:prettier": "prettier --check '**/*.md'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
-    "generate-openapi": "npx openapi-typescript-codegen --input ./openapi.yaml --indent 2 --output ./src/shared/api/generated"
+    "generate-openapi": "rm -rf ./src/shared/api/generated && npx openapi-typescript-codegen --name GeneratedSarcApiClient --input ./openapi.yaml --indent 2 --output ./src/shared/api/generated"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -4,17 +4,17 @@
 /* eslint-disable */
 import type { User } from '../models/User';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class UsersService {
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
    * получение пользователя
    * Returns a user
    * @returns User successful operation
    * @throws ApiError
    */
-  public static getUser(): CancelablePromise<User> {
-    return __request(OpenAPI, {
+  public getUser(): CancelablePromise<User> {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/user',
       errors: {
@@ -31,11 +31,11 @@ export class UsersService {
    * @returns string successful operation
    * @throws ApiError
    */
-  public static checkSms(
+  public checkSms(
     phone: string,
     sms: string,
   ): CancelablePromise<string> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/checksms',
       headers: {
@@ -55,10 +55,10 @@ export class UsersService {
    * @returns any successful operation
    * @throws ApiError
    */
-  public static sendSms(
+  public sendSms(
     phone: string,
   ): CancelablePromise<any> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/sendsms',
       headers: {
@@ -76,8 +76,8 @@ export class UsersService {
    * @returns any successful operation
    * @throws ApiError
    */
-  public static logout(): CancelablePromise<any> {
-    return __request(OpenAPI, {
+  public logout(): CancelablePromise<any> {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/logout',
       errors: {

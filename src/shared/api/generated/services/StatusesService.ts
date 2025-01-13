@@ -5,9 +5,9 @@
 import type { Status } from '../models/Status';
 import type { StatususResponse } from '../models/StatususResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
-import { OpenAPI } from '../core/OpenAPI';
-import { request as __request } from '../core/request';
+import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class StatusesService {
+  constructor(public readonly httpRequest: BaseHttpRequest) {}
   /**
    * Обновление существующего статуса
    * Update an existing status by Id
@@ -15,10 +15,10 @@ export class StatusesService {
    * @returns Status Successful operation
    * @throws ApiError
    */
-  public static updateStatus(
+  public updateStatus(
     requestBody: Status,
   ): CancelablePromise<Status> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'PUT',
       url: '/statuses',
       body: requestBody,
@@ -37,10 +37,10 @@ export class StatusesService {
    * @returns Status Successful operation
    * @throws ApiError
    */
-  public static addStatus(
+  public addStatus(
     requestBody: Status,
   ): CancelablePromise<Status> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'POST',
       url: '/statuses',
       body: requestBody,
@@ -57,8 +57,8 @@ export class StatusesService {
    * @returns StatususResponse successful operation
    * @throws ApiError
    */
-  public static getStatuses(): CancelablePromise<StatususResponse> {
-    return __request(OpenAPI, {
+  public getStatuses(): CancelablePromise<StatususResponse> {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/statuses',
       errors: {
@@ -73,10 +73,10 @@ export class StatusesService {
    * @returns Status successful operation
    * @throws ApiError
    */
-  public static getStatusById(
+  public getStatusById(
     statusId: string,
   ): CancelablePromise<Status> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'GET',
       url: '/statuses/{statusId}',
       path: {
@@ -95,10 +95,10 @@ export class StatusesService {
    * @returns any successful operation
    * @throws ApiError
    */
-  public static deleteStatus(
+  public deleteStatus(
     statusId: string,
   ): CancelablePromise<any> {
-    return __request(OpenAPI, {
+    return this.httpRequest.request({
       method: 'DELETE',
       url: '/statuses/{statusId}',
       path: {

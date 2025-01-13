@@ -1,7 +1,7 @@
-import { CancelablePromise, IncidentsResponse, IncidentsService } from 'shared/api/generated';
+import { GeneratedSarcApiClient } from 'shared/api/generated';
 import { sleep } from 'shared/utils/promiseUtils';
 
-class ApiClient {
+class SarcApiClient extends GeneratedSarcApiClient {
   async login(login: string, password: string): Promise<string> {
     await sleep(1000);
     if (login === 'ivan' && password === 'password1') {
@@ -9,10 +9,6 @@ class ApiClient {
     }
     throw new Error('Password wrong');
   }
-
-  getIncidents(): CancelablePromise<IncidentsResponse> {
-    return IncidentsService.getIncidents();
-  }
 }
 
-export const apiClient = new ApiClient();
+export const apiClient = new SarcApiClient();
