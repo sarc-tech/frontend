@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { StatusesPageModel } from 'pages/statuses/StatusesPageModel';
+import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
@@ -29,7 +30,7 @@ const b = block('status-row');
 export const StatusesPage: FC = observer(() => {
   const navigate = useNavigate();
 
-  const [model] = useState(() => new StatusesPageModel());
+  const model = useInject(StatusesPageModel);
 
   const table = useTable({
     columns,

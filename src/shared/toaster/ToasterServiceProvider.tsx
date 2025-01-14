@@ -2,13 +2,15 @@ import { FC, ReactNode, useEffect } from 'react';
 
 import { ToasterComponent, ToasterProvider, useToaster } from '@gravity-ui/uikit';
 
-import { toasterService } from 'features/toaster/ToasterService';
+import { ToasterService } from 'shared/toaster/ToasterService';
+import { useInject } from 'shared/utils/hooks/useInject';
 
 const DelegateInitializer: FC = () => {
   const toaster = useToaster();
+  const toasterService = useInject(ToasterService);
   useEffect(() => {
     toasterService.setDelegate(toaster);
-  }, [toaster]);
+  }, [toaster, toasterService]);
   return null;
 };
 

@@ -1,4 +1,4 @@
-import { Theme } from '@gravity-ui/uikit';
+import type { Theme } from '@gravity-ui/uikit';
 import { action, computed, makeAutoObservable, observable } from 'mobx';
 
 const DARK: Theme = 'dark';

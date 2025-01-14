@@ -4,8 +4,9 @@ import { DFDialog } from '@gravity-ui/dialog-fields';
 import { Container } from '@gravity-ui/uikit';
 import { useParams } from 'react-router-dom';
 
-import { apiClient } from 'shared/api/ApiClient';
+import { SarcApiClient } from 'shared/api/SarcApiClient';
 import { Status } from 'shared/api/generated';
+import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
@@ -18,11 +19,15 @@ export const StatusPage: FC = () => {
   const { id } = useParams();
 
   const [status, setStatus] = useState<Status>();
+  const apiClient = useInject(SarcApiClient);
+
   useEffect(() => {
-    apiClient.statuses.getStatusById(id!).then((res) => {
-      setStatus(res);
-    });
-  }, []);
+    if (id !== undefined) {
+      apiClient.statuses.getStatusById(id).then((res) => {
+        setStatus(res);
+      });
+    }
+  }, [apiClient.statuses, id]);
 
   return (
     <SideMenuState>

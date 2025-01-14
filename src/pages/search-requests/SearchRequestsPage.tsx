@@ -7,7 +7,8 @@ import block from 'bem-cn-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
-import { apiClient } from 'shared/api/ApiClient';
+import { SarcApiClient } from 'shared/api/SarcApiClient';
+import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
@@ -35,12 +36,13 @@ export const SearchRequestsPage: FC = () => {
   const navigate = useNavigate();
 
   const [searchRequests, setSearchRequests] = useState<Incident[]>([]);
+  const apiClient = useInject(SarcApiClient);
 
   useEffect(() => {
     apiClient.incidents.getIncidents().then((res) => {
       setSearchRequests(res.data);
     });
-  }, []);
+  }, [apiClient.incidents]);
 
   const table = useTable({
     columns,

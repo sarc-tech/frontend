@@ -27,5 +27,3 @@ export class ToasterService implements ToasterPublicMethods {
     this.delegate?.update(toastName, override);
   }
 }
-
-export const toasterService = new ToasterService();

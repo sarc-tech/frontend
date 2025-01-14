@@ -38,5 +38,3 @@ export class AuthStore {
     return this.token !== null;
   }
 }
-
-export const authStore = new AuthStore();

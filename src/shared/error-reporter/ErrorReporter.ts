@@ -7,6 +7,3 @@ export class ErrorReporter {
     console.error('Error tracked by ErrorTracker', error);
   }
 }
-
-// TODO перенести создание в DI
-export const errorTracker = new ErrorReporter();

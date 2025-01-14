@@ -1,73 +1,16 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { Button, Flex, PasswordInput, Text, TextInput, spacing } from '@gravity-ui/uikit';
-import { action, makeAutoObservable, observable, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { Navigate } from 'react-router';
 
-import { authStore } from 'features/AuthStore';
-import { apiClient } from 'shared/api/ApiClient';
-
-class LoginPageModel {
-  @observable
-  email = '';
-
-  @observable
-  password = '';
-
-  @observable
-  loading = false;
-
-  @observable
-  formError: string | null = null;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  @action
-  setEmail(email: string) {
-    this.email = email;
-    this.formError = null;
-  }
-
-  @action
-  setPassword(password: string) {
-    this.password = password;
-    this.formError = null;
-  }
-
-  @action
-  setLoading(loading: boolean) {
-    this.loading = loading;
-  }
-
-  @action
-  setFormError(formError: string | null) {
-    this.formError = formError;
-  }
-
-  @action
-  async loginClicked() {
-    this.loading = true;
-    this.formError = null;
-
-    try {
-      const token = await apiClient.login(this.email, this.password);
-      authStore.setToken(token);
-    } catch {
-      runInAction(() => {
-        this.formError = 'Не правильный логин или пароль';
-      });
-    }
-    runInAction(() => {
-      this.loading = false;
-    });
-  }
-}
+import { AuthStore } from 'features/AuthStore';
+import { LoginPageModel } from 'pages/login/LoginPageModel';
+import { useInject } from 'shared/utils/hooks/useInject';
 
 export const LoginPage: FC = observer(() => {
-  const [model] = useState(() => new LoginPageModel());
+  const model = useInject(LoginPageModel);
+  const authStore = useInject(AuthStore);
 
   if (authStore.isLogged) {
     return <Navigate to="/" />;

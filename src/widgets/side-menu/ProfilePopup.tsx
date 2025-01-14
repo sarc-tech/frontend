@@ -4,7 +4,8 @@ import { ArrowRightFromSquare } from '@gravity-ui/icons';
 import { Button, Flex, Icon, Popup, Text, User, spacing } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
 
-import { authStore } from 'features/AuthStore';
+import { AuthStore } from 'features/AuthStore';
+import { useInject } from 'shared/utils/hooks/useInject';
 
 type ProfilePopupState = {
   ref: RefObject<Element>;
@@ -28,6 +29,7 @@ export const useProfilePopupState = () => {
 };
 
 export const ProfilePopup: FC<Props> = observer((props) => {
+  const authStore = useInject(AuthStore);
   return (
     <Popup
       anchorRef={props.state.ref}
