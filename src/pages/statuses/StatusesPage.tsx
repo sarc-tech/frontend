@@ -4,14 +4,11 @@ import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
 import { Container } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
+import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
-import { toasterService } from 'features/toaster/ToasterService';
-import { apiClient } from 'shared/api/ApiClient';
-import { ApiError, Status } from 'shared/api/generated';
-import { errorTracker } from 'shared/error-reporter/ErrorReporter';
-import { useEffectAsync } from 'shared/utils/hooks/useEffectAsync';
+import { StatusesPageModel } from 'pages/statuses/StatusesPageModel';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
@@ -29,40 +26,15 @@ const columns: ColumnDef<Statuses>[] = [
 
 const b = block('status-row');
 
-export const StatusesPage: FC = () => {
+export const StatusesPage: FC = observer(() => {
   const navigate = useNavigate();
 
-  const [statuses, setStatuses] = useState<Status[]>([]);
-
-  useEffectAsync(async () => {
-    try {
-      const statusesResponse = await apiClient.statuses.getStatuses();
-      setStatuses(statusesResponse.data);
-    } catch (error) {
-      if (error instanceof ApiError) {
-        toasterService.add({
-          name: `error-server-response-${error.status}`,
-          title: 'Некорректный ответ от сервера',
-          content: `HTTP ${error.status} ${error.statusText}`,
-          theme: 'danger',
-        });
-      } else {
-        const errorDescription = String(error);
-        toasterService.add({
-          name: `unknown-error:${errorDescription}`,
-          title: 'Неизвестная ошибка',
-          content: errorDescription,
-          theme: 'danger',
-        });
-        errorTracker.report(error);
-      }
-    }
-  }, []);
+  const [model] = useState(() => new StatusesPageModel());
 
   const table = useTable({
     columns,
     getRowId: (item) => item.id,
-    data: statuses,
+    data: model.statuses,
   });
 
   return (
@@ -80,4 +52,4 @@ export const StatusesPage: FC = () => {
       </Container>
     </SideMenuState>
   );
-};
+});
