@@ -61,13 +61,6 @@ export const SideMenuState: FC<Props> = observer((props) => {
           title: 'Статусы',
           icon: LayoutList,
         },
-        {
-          id: AppRoutes.gravitySample,
-          current: isMatchingPath(AppRoutes.gravitySample, pathname),
-          onItemClick: () => navigate(AppRoutes.gravitySample),
-          title: 'Gravity UI Sample',
-          icon: LifeRing,
-        },
       ]}
       headerDecoration={true}
       renderContent={() => (

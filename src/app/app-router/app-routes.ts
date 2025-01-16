@@ -11,5 +11,4 @@ export const AppRoutes = {
     template: '/statuses/:id',
     new: (id: string) => `/statuses/${id}`,
   },
-  gravitySample: '/gravity-sample',
 };
