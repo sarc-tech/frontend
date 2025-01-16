@@ -2,30 +2,41 @@ import { inject } from 'inversify';
 import { action, makeAutoObservable, observable, runInAction } from 'mobx';
 
 import { AuthStore } from 'features/AuthStore';
+import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCase';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
 
+import { LoginPage } from './LoginPage';
+
 export class LoginPageModel {
+  static CODE_SIZE = 6;
+
   @observable
   phone = '';
 
   @observable
-  code = '';
+  code: string[] = [];
 
   @observable
   loading = false;
+
+  @observable
+  step = 0;
 
   @observable
   formError: string | null = null;
 
   private readonly apiClient: SarcApiClient;
   private readonly authStore: AuthStore;
+  private readonly handleNetworkErrorUseCase: HandleNetworkErrorUseCase;
 
   constructor(
     @inject(SarcApiClient) apiClient: SarcApiClient,
     @inject(AuthStore) authStore: AuthStore,
+    @inject(HandleNetworkErrorUseCase) handleNetworkErrorUseCase: HandleNetworkErrorUseCase,
   ) {
     this.apiClient = apiClient;
     this.authStore = authStore;
+    this.handleNetworkErrorUseCase = handleNetworkErrorUseCase;
     makeAutoObservable(this);
   }
 
@@ -36,9 +47,13 @@ export class LoginPageModel {
   }
 
   @action
-  setCode(code: string) {
+  setCode(code: string[]) {
     this.code = code;
     this.formError = null;
+    const codeSize = this.code.filter((charString) => charString.length > 0).length;
+    if (codeSize === LoginPageModel.CODE_SIZE) {
+      this.confirmCode();
+    }
   }
 
   @action
@@ -52,18 +67,31 @@ export class LoginPageModel {
   }
 
   @action
-  async loginClicked() {
+  async requestCode() {
     this.loading = true;
     this.formError = null;
 
     try {
       await this.apiClient.users.sendSms(this.phone);
-      const tokenResponse = await this.apiClient.users.checkSms(this.phone, this.code);
-      this.authStore.setToken(tokenResponse.token);
-    } catch {
       runInAction(() => {
-        this.formError = 'Не правильный логин или пароль';
+        this.step = 1;
       });
+    } catch (error) {
+      this.handleNetworkErrorUseCase.invoke(error);
+    }
+    runInAction(() => {
+      this.loading = false;
+    });
+  }
+
+  @action
+  async confirmCode() {
+    this.loading = true;
+    try {
+      const tokenResponse = await this.apiClient.users.checkSms(this.phone, this.code.join(''));
+      this.authStore.setToken(tokenResponse.token);
+    } catch (error) {
+      this.handleNetworkErrorUseCase.invoke(error);
     }
     runInAction(() => {
       this.loading = false;
