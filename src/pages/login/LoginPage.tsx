@@ -31,7 +31,7 @@ export const LoginPage: FC = observer(() => {
 
   return (
     <Flex centerContent width="100%" minHeight="100%">
-      <Flex centerContent direction="column" width="100%" maxWidth="350px" as="form">
+      <Flex centerContent direction="column" width="100%" maxWidth="200px" as="form">
         {model.step === 0 && (
           <>
             <Text className={spacing({ mb: 4 })} variant={'header-1'}>
