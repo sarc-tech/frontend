@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Button, Flex, PasswordInput, Text, TextInput, spacing } from '@gravity-ui/uikit';
+import { Button, Flex, Text, TextInput, spacing } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
 import { Navigate } from 'react-router';
 
@@ -23,15 +23,15 @@ export const LoginPage: FC = observer(() => {
           Вход
         </Text>
         <TextInput
-          placeholder={'Email'}
-          value={model.email}
-          onUpdate={model.setEmail.bind(model)}
+          placeholder={'Номер телефона'}
+          value={model.phone}
+          onUpdate={model.setPhone.bind(model)}
         />
-        <PasswordInput
-          placeholder={'Пароль'}
+        <TextInput
+          placeholder={'Код'}
           className={spacing({ mt: 2 })}
-          value={model.password}
-          onUpdate={model.setPassword.bind(model)}
+          value={model.code}
+          onUpdate={model.setCode.bind(model)}
         />
         {model.formError !== null && (
           <Text color={'danger'} className={spacing({ my: 1 })}>
@@ -44,7 +44,7 @@ export const LoginPage: FC = observer(() => {
           className={spacing({ mt: 4 })}
           onClick={model.loginClicked.bind(model)}
           loading={model.loading}
-          disabled={model.email.length === 0 || model.password.length === 0}
+          disabled={model.phone.length === 0 || model.code.length === 0}
         >
           Войти
         </Button>

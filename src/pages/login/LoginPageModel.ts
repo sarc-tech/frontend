@@ -6,10 +6,10 @@ import { SarcApiClient } from 'shared/api/SarcApiClient';
 
 export class LoginPageModel {
   @observable
-  email = '';
+  phone = '';
 
   @observable
-  password = '';
+  code = '';
 
   @observable
   loading = false;
@@ -30,14 +30,14 @@ export class LoginPageModel {
   }
 
   @action
-  setEmail(email: string) {
-    this.email = email;
+  setPhone(phone: string) {
+    this.phone = phone;
     this.formError = null;
   }
 
   @action
-  setPassword(password: string) {
-    this.password = password;
+  setCode(code: string) {
+    this.code = code;
     this.formError = null;
   }
 
@@ -57,8 +57,9 @@ export class LoginPageModel {
     this.formError = null;
 
     try {
-      const token = await this.apiClient.login(this.email, this.password);
-      this.authStore.setToken(token);
+      await this.apiClient.users.sendSms(this.phone);
+      const tokenResponse = await this.apiClient.users.checkSms(this.phone, this.code);
+      this.authStore.setToken(tokenResponse.token);
     } catch {
       runInAction(() => {
         this.formError = 'Не правильный логин или пароль';
