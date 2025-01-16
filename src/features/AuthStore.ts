@@ -1,4 +1,7 @@
-import { action, computed, makeAutoObservable, observable, reaction } from 'mobx';
+import { inject } from 'inversify';
+import { action, autorun, computed, makeAutoObservable, observable, reaction } from 'mobx';
+
+import { SarcApiClient } from 'shared/api/SarcApiClient';
 
 export class AuthStore {
   private static localStorageKey = 'authToken';
@@ -6,7 +9,10 @@ export class AuthStore {
   @observable
   token: string | null = null;
 
-  constructor() {
+  private readonly apiClient: SarcApiClient;
+
+  constructor(@inject(SarcApiClient) apiClient: SarcApiClient) {
+    this.apiClient = apiClient;
     makeAutoObservable(this);
     this.token = localStorage.getItem(AuthStore.localStorageKey);
 
@@ -21,6 +27,9 @@ export class AuthStore {
         }
       },
     );
+
+    // пробрасываем изначальное значение и все изменения токена в apiClient
+    autorun(() => this.apiClient.setAuthToken(this.token));
   }
 
   @action

@@ -9,4 +9,8 @@ export class SarcApiClient extends GeneratedSarcApiClient {
     }
     throw new Error('Password wrong');
   }
+
+  setAuthToken(authToken: string | null) {
+    this.request.config.TOKEN = authToken ?? undefined;
+  }
 }
