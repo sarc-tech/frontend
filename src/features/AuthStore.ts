@@ -14,7 +14,11 @@ export class AuthStore {
   constructor(@inject(SarcApiClient) apiClient: SarcApiClient) {
     this.apiClient = apiClient;
     makeAutoObservable(this);
+  }
+
+  initialize() {
     this.token = localStorage.getItem(AuthStore.localStorageKey);
+    this.apiClient.setAuthToken(this.token);
 
     // пока не сохраняем disposer никуда, потому что стор глобальный
     reaction(
@@ -29,7 +33,9 @@ export class AuthStore {
     );
 
     // пробрасываем изначальное значение и все изменения токена в apiClient
-    autorun(() => this.apiClient.setAuthToken(this.token));
+    autorun(() => {
+      this.apiClient.setAuthToken(this.token);
+    });
   }
 
   @action

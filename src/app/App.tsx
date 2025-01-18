@@ -3,6 +3,7 @@ import { FC } from 'react';
 import 'reflect-metadata';
 
 import { AppRouter } from 'app/app-router/AppRouter';
+import { AppInitializer } from 'features/app-initializer/AppInitializer';
 import { ToasterServiceProvider } from 'shared/toaster/ToasterServiceProvider';
 import { AppThemeProvider } from 'widgets/app-theme-provider/AppThemeProvider';
 
@@ -14,7 +15,9 @@ export const App: FC = () => {
   return (
     <AppThemeProvider>
       <ToasterServiceProvider>
-        <AppRouter />
+        <AppInitializer>
+          <AppRouter />
+        </AppInitializer>
       </ToasterServiceProvider>
     </AppThemeProvider>
   );
