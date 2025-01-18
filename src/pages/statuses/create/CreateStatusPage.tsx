@@ -1,13 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { DFDialog } from '@gravity-ui/dialog-fields';
+import { DFDialog, FormApi } from '@gravity-ui/dialog-fields';
 import { Container } from '@gravity-ui/uikit';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { AppRoutes } from 'app/app-router/app-routes';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
-import { Status } from 'shared/api/generated';
 import { useInject } from 'shared/utils/hooks/useInject';
-import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 interface FormValues {
@@ -15,30 +14,28 @@ interface FormValues {
   name: string;
 }
 
-export const StatusPage: FC = () => {
-  const { id } = useParams();
+export const CreateStatusPage: FC = () => {
+  const navigate = useNavigate();
 
-  const [status, setStatus] = useState<Status>();
   const apiClient = useInject(SarcApiClient);
 
-  useEffect(() => {
-    if (id !== undefined) {
-      apiClient.statuses.getStatusById(id).then((res) => {
-        setStatus(res);
-      });
+  function onSubmit(values: FormApi<FormValues>) {
+    if (values.getState().submitting) {
+      apiClient.statuses.addStatus(values.getState().values);
     }
-  }, [apiClient.statuses, id]);
+    navigate(AppRoutes.statusesList);
+  }
 
   return (
     <SideMenuState>
       <Container>
-        <PageHeader>Статус id: {id}</PageHeader>
         <DFDialog<FormValues>
           visible={true}
-          initialValues={status}
+          modal={false}
           headerProps={{
-            title: 'Статус:',
+            title: 'Добавить статус',
           }}
+          onClose={(form) => onSubmit(form)}
           onAdd={(form) => {
             form.getState();
             return Promise.resolve();
@@ -47,14 +44,19 @@ export const StatusPage: FC = () => {
             {
               name: 'id',
               type: 'text',
-              caption: 'id',
+              caption: 'ID',
               tooltip: 'Номер статуса',
+              extras: () => {
+                return {
+                  disabled: true,
+                };
+              },
             },
             {
               name: 'name',
               type: 'text',
-              caption: 'Наименование статуса',
-              tooltip: 'Наименование статуса',
+              caption: 'Название статуса',
+              tooltip: 'Название статуса',
             },
           ]}
         />

@@ -2,18 +2,18 @@ import { FC } from 'react';
 
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
-import { Container } from '@gravity-ui/uikit';
+import { Button, Container, spacing } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
-import { StatusesPageModel } from 'pages/statuses/StatusesPageModel';
+import { StatusesPageModel } from 'pages/statuses/list/StatusesPageModel';
 import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
-import 'pages/statuses/status-row.scss';
+import 'pages/statuses/list/status-row.scss';
 
 interface Statuses {
   id: string;
@@ -42,7 +42,14 @@ export const StatusesPage: FC = observer(() => {
     <SideMenuState>
       <Container>
         <PageHeader>Список статусов</PageHeader>
-
+        <Button
+          view="action"
+          type="submit"
+          className={spacing({ mt: 4 })}
+          onClick={() => navigate(AppRoutes.statusesAdd)}
+        >
+          Добавить новый статус
+        </Button>
         <Table
           table={table}
           rowClassName={b()}

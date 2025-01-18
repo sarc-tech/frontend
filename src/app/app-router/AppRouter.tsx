@@ -10,8 +10,9 @@ import { ErrorPage } from 'pages/error/ErrorPage';
 import { LoginPage } from 'pages/login/LoginPage';
 import { SearchRequestPage } from 'pages/search-request/SearchRequestPage';
 import { SearchRequestsPage } from 'pages/search-requests/SearchRequestsPage';
-import { StatusPage } from 'pages/status/StatusPage';
-import { StatusesPage } from 'pages/statuses/StatusesPage';
+import { CreateStatusPage } from 'pages/statuses/create/CreateStatusPage';
+import { StatusesPage } from 'pages/statuses/list/StatusesPage';
+import { StatusPage } from 'pages/statuses/one/StatusPage';
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: AppRoutes.statuses,
+        path: AppRoutes.statusesList,
         element: (
           <ProtectedRoute>
             <StatusesPage />
@@ -67,6 +68,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <StatusPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: AppRoutes.statusesAdd,
+        element: (
+          <ProtectedRoute>
+            <CreateStatusPage />
           </ProtectedRoute>
         ),
       },
