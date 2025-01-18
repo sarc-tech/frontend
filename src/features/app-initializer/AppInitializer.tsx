@@ -6,9 +6,10 @@ import { makeAutoObservable, observable, runInAction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 
 import { AuthStore } from 'features/AuthStore';
+import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCase';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
+import { ApiError } from 'shared/api/generated';
 import { useInject } from 'shared/utils/hooks/useInject';
-import { sleep } from 'shared/utils/promiseUtils';
 
 class AppInitializerModel {
   @observable
@@ -16,13 +17,16 @@ class AppInitializerModel {
 
   private readonly sarcApiClient: SarcApiClient;
   private readonly authStore: AuthStore;
+  private readonly handleNetworkErrorUseCase: HandleNetworkErrorUseCase;
 
   constructor(
     @inject(SarcApiClient) sarcApiClient: SarcApiClient,
     @inject(AuthStore) authStore: AuthStore,
+    @inject(HandleNetworkErrorUseCase) handleNetworkErrorUseCase: HandleNetworkErrorUseCase,
   ) {
     this.sarcApiClient = sarcApiClient;
     this.authStore = authStore;
+    this.handleNetworkErrorUseCase = handleNetworkErrorUseCase;
     makeAutoObservable(this);
     this.initialize();
   }
@@ -30,10 +34,18 @@ class AppInitializerModel {
   private async initialize(): Promise<void> {
     this.authStore.initialize();
     if (this.authStore.isLogged) {
-      // const response = await this.sarcApiClient.users.getUser();
-      // TODO симуляция сетевых запросов при инициализации.
-      //  Выпилить, когда заработает бэкенд.
-      await sleep(500);
+      try {
+        const loggedUser = await this.sarcApiClient.users.getUser();
+        this.authStore.setLoggedUser(loggedUser);
+      } catch (error) {
+        if (error instanceof ApiError) {
+          if (error.status === 401) {
+            this.authStore.clearToken();
+          }
+        } else {
+          this.handleNetworkErrorUseCase.invoke(error);
+        }
+      }
     }
     runInAction(() => {
       this.initialized = true;

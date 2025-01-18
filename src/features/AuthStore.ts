@@ -2,12 +2,16 @@ import { inject } from 'inversify';
 import { action, autorun, computed, makeAutoObservable, observable, reaction } from 'mobx';
 
 import { SarcApiClient } from 'shared/api/SarcApiClient';
+import type { User } from 'shared/api/generated';
 
 export class AuthStore {
   private static localStorageKey = 'authToken';
 
   @observable
   token: string | null = null;
+
+  @observable
+  loggedUser: User | null = null;
 
   private readonly apiClient: SarcApiClient;
 
@@ -46,6 +50,11 @@ export class AuthStore {
   @action
   clearToken() {
     this.token = null;
+  }
+
+  @action
+  setLoggedUser(loggedUser: User) {
+    this.loggedUser = loggedUser;
   }
 
   @computed
