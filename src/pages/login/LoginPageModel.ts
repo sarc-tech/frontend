@@ -5,8 +5,6 @@ import { AuthStore } from 'features/AuthStore';
 import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCase';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
 
-import { LoginPage } from './LoginPage';
-
 export class LoginPageModel {
   static CODE_SIZE = 6;
 

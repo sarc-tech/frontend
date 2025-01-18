@@ -41,9 +41,9 @@ export const SideMenuState: FC<Props> = observer((props) => {
       onChangeCompact={(compact) => sideMenuState.setCompact(compact)}
       menuItems={[
         {
-          id: AppRoutes.searchRequests,
-          current: isMatchingPath(AppRoutes.searchRequests, pathname),
-          onItemClick: () => navigate(AppRoutes.searchRequests),
+          id: AppRoutes.incidents,
+          current: isMatchingPath(AppRoutes.incidents, pathname),
+          onItemClick: () => navigate(AppRoutes.incidents),
           title: 'Заявки',
           icon: DisplayPulse,
         },

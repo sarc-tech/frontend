@@ -1,5 +1,13 @@
 import { inject } from 'inversify';
-import { action, autorun, computed, makeAutoObservable, observable, reaction } from 'mobx';
+import {
+  action,
+  autorun,
+  computed,
+  makeAutoObservable,
+  observable,
+  reaction,
+  runInAction,
+} from 'mobx';
 
 import { SarcApiClient } from 'shared/api/SarcApiClient';
 import type { User } from 'shared/api/generated';
@@ -21,7 +29,9 @@ export class AuthStore {
   }
 
   initialize() {
-    this.token = localStorage.getItem(AuthStore.localStorageKey);
+    runInAction(() => {
+      this.token = localStorage.getItem(AuthStore.localStorageKey);
+    });
     this.apiClient.setAuthToken(this.token);
 
     // пока не сохраняем disposer никуда, потому что стор глобальный

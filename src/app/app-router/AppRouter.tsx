@@ -1,88 +1,10 @@
 import { FC } from 'react';
 
-import { Navigate } from 'react-router';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Router, RouterProvider } from 'react-router-dom';
 
-import { ProtectedRoute } from 'app/app-router/ProtectedRoute';
-import { AppRoutes } from 'app/app-router/app-routes';
-import { CallsPage } from 'pages/calls/CallsPage';
-import { ErrorPage } from 'pages/error/ErrorPage';
-import { LoginPage } from 'pages/login/LoginPage';
-import { SearchRequestPage } from 'pages/search-request/SearchRequestPage';
-import { SearchRequestsPage } from 'pages/search-requests/SearchRequestsPage';
-import { CreateStatusPage } from 'pages/statuses/create/CreateStatusPage';
-import { StatusesPage } from 'pages/statuses/list/StatusesPage';
-import { StatusPage } from 'pages/statuses/one/StatusPage';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: (
-          <ProtectedRoute>
-            <Navigate to={AppRoutes.searchRequests} />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: AppRoutes.login,
-        element: <LoginPage />,
-      },
-      {
-        path: AppRoutes.calls,
-        element: (
-          <ProtectedRoute>
-            <CallsPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: AppRoutes.searchRequests,
-        element: (
-          <ProtectedRoute>
-            <SearchRequestsPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: AppRoutes.searchRequest.template,
-        element: (
-          <ProtectedRoute>
-            <SearchRequestPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: AppRoutes.statusesList,
-        element: (
-          <ProtectedRoute>
-            <StatusesPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: AppRoutes.status.template,
-        element: (
-          <ProtectedRoute>
-            <StatusPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: AppRoutes.statusesAdd,
-        element: (
-          <ProtectedRoute>
-            <CreateStatusPage />
-          </ProtectedRoute>
-        ),
-      },
-    ],
-  },
-]);
+import { useInject } from 'shared/utils/hooks/useInject';
 
 export const AppRouter: FC = () => {
+  const router = useInject(Router);
   return <RouterProvider router={router} />;
 };

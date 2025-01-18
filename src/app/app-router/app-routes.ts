@@ -1,12 +1,12 @@
 export const AppRoutes = {
   login: '/login',
   calls: '/calls',
-  searchRequests: '/search-requests',
-  searchRequest: {
-    template: '/search-requests/:id',
-    new: (id: string) => `/search-requests/${id}`,
+  incidents: '/incidents',
+  incident: {
+    template: '/incidents/:id',
+    new: (id: string) => `/incidents/${id}`,
   },
-  searchRequestsadd: '/search-requests/add',
+  incidentAdd: '/incidents/add',
   statusesList: '/statuses',
   status: {
     template: '/statuses/:id',

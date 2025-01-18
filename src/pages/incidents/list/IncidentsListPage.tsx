@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 
+import { Plus } from '@gravity-ui/icons';
 import { Table, useTable } from '@gravity-ui/table';
 import type { ColumnDef } from '@gravity-ui/table/tanstack';
-import { Container } from '@gravity-ui/uikit';
+import { Button, Container, Icon, spacing } from '@gravity-ui/uikit';
 import block from 'bem-cn-lite';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
-import 'pages/search-requests/search-request-row.scss';
+import 'pages/incidents/list/incident-row.scss';
 
 interface Incident {
   id: string;
@@ -32,7 +33,7 @@ const columns: ColumnDef<Incident>[] = [
 
 const b = block('search-request-row');
 
-export const SearchRequestsPage: FC = () => {
+export const IncidentsListPage: FC = () => {
   const navigate = useNavigate();
 
   const [searchRequests, setSearchRequests] = useState<Incident[]>([]);
@@ -54,12 +55,19 @@ export const SearchRequestsPage: FC = () => {
     <SideMenuState>
       <Container>
         <PageHeader>Список заявок</PageHeader>
-
+        <Button
+          view="action"
+          className={spacing({ mb: 2 })}
+          onClick={() => navigate(AppRoutes.incidentAdd)}
+        >
+          <Icon data={Plus} />
+          Создать заявку
+        </Button>
         <Table
           table={table}
           rowClassName={b()}
           onRowClick={(item) => {
-            navigate(AppRoutes.searchRequest.new(item.id));
+            navigate(AppRoutes.incident.new(item.id));
           }}
         />
       </Container>
