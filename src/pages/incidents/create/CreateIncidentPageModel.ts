@@ -1,8 +1,8 @@
 import { inject } from 'inversify';
 import { action, makeAutoObservable } from 'mobx';
-import { Router, createBrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
-import { RouterType } from 'app/app-router/RouterType';
+import type { RouterType } from 'app/app-router/RouterType';
 import { AppRoutes } from 'app/app-router/app-routes';
 import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCase';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
@@ -10,7 +10,7 @@ import { SarcApiClient } from 'shared/api/SarcApiClient';
 export class CreateIncidentPageModel {
   private readonly sarcApiClient: SarcApiClient;
   private readonly handleNetworkErrorUseCase: HandleNetworkErrorUseCase;
-  private readonly router: ReturnType<typeof createBrowserRouter>;
+  private readonly router: RouterType;
 
   constructor(
     @inject(SarcApiClient) sarcApiClient: SarcApiClient,
