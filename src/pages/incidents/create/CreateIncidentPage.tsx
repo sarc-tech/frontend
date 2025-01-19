@@ -63,9 +63,13 @@ export const CreateIncidentPage: FC = observer(() => {
             },
             {
               name: 'statusId',
-              type: 'text',
+              type: 'select',
               caption: 'Статус',
               tooltip: 'Статус',
+              extras: {
+                options: model.allStatuses,
+                loading: model.allStatusesLoading,
+              },
             },
             {
               name: 'date',
