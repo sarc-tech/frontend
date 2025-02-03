@@ -7,6 +7,7 @@ import { AppRoutes } from 'app/app-router/app-routes';
 import { CallsPage } from 'pages/calls/CallsPage';
 import { ErrorPage } from 'pages/error/ErrorPage';
 import { CreateIncidentPage } from 'pages/incidents/create/CreateIncidentPage';
+import { IncidentEditPage } from 'pages/incidents/edit/IncidentPage';
 import { IncidentsListPage } from 'pages/incidents/list/IncidentsListPage';
 import { IncidentPage } from 'pages/incidents/one/IncidentPage';
 import { LoginPage } from 'pages/login/LoginPage';
@@ -52,7 +53,7 @@ export function createRouter(): RouterType {
           path: AppRoutes.incident.template,
           element: (
             <ProtectedRoute>
-              <IncidentPage />
+              <IncidentEditPage />
             </ProtectedRoute>
           ),
         },
