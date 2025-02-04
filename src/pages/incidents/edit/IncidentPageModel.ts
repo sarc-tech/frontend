@@ -36,7 +36,10 @@ export class IncidentEditPageModel {
     this.router = router;
     makeAutoObservable(this);
     this.loadStatuses();
-    this.loadIncident();
+  }
+
+  getIncident(id: string) {
+    this.loadIncident(id);
   }
 
   @action
@@ -70,10 +73,9 @@ export class IncidentEditPageModel {
     });
   }
 
-  private async loadIncident(): Promise<void> {
-    //const { id } = useParams();
+  private async loadIncident(id: string): Promise<void> {
     try {
-      const incident = await this.sarcApiClient.incidents.getIncidentById('1');
+      const incident = await this.sarcApiClient.incidents.getIncidentById(id);
 
       runInAction(() => {
         this.incident = incident;

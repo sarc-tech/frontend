@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Container, Flex, Loader } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { IncidentEditPageModel } from 'pages/incidents/edit/IncidentPageModel';
@@ -21,8 +21,10 @@ interface FormValues {
 export const IncidentEditPage: FC = observer(() => {
   const navigate = useNavigate();
   const model = useInject(IncidentEditPageModel);
+  const { id } = useParams();
 
   if (model.incidentLoading) {
+    model.getIncident(id!);
     return (
       <SideMenuState>
         <Container>
