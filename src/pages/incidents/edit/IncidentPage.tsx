@@ -1,16 +1,14 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { DFDialog, FormApi } from '@gravity-ui/dialog-fields';
 import { Container, Flex, Loader } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
+import { IncidentEditPageModel } from 'pages/incidents/edit/IncidentPageModel';
 import { useInject } from 'shared/utils/hooks/useInject';
 import { MyDialog } from 'widgets/MyDialog';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
-
-import { IncidentEditPageModel } from './IncidentPageModel';
 
 interface FormValues {
   id: string;

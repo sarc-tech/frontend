@@ -25,6 +25,9 @@
 
     // Иногда negated-condition позволяет выразить более читабельную конструкцию, когда
     // основную ветку логичнее расположить вверху
-    "no-negated-condition": 0
+    "no-negated-condition": 0,
+    "@typescript-eslint/no-non-null-assertion": ["off"],
+    "@typescript-eslint/no-explicit-any": ["off"]
+    
   }
 }

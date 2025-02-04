@@ -13,7 +13,7 @@ module.exports = {
        * Подробнее тут:
        * https://github.com/inversify/InversifyJS/issues/1408#issuecomment-2508274719
        */
-      // webpackConfig.ignoreWarnings = [/Failed to parse source map/];
+      webpackConfig.ignoreWarnings = [/Failed to parse source map/];
 
       return webpackConfig;
     },

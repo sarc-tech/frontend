@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { DisplayPulse, LayoutList, LifeRing } from '@gravity-ui/icons';
+import { DisplayPulse, LayoutList } from '@gravity-ui/icons';
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
 import { Avatar } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';

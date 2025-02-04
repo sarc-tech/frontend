@@ -1,7 +1,7 @@
 import { SelectOption } from '@gravity-ui/uikit/build/esm/components/Select/types';
 import { inject } from 'inversify';
 import { action, makeAutoObservable, observable, runInAction } from 'mobx';
-import { Router, useParams } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
 import type { RouterType } from 'app/app-router/RouterType';
 import { AppRoutes } from 'app/app-router/app-routes';

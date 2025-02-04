@@ -9,7 +9,6 @@ import { ErrorPage } from 'pages/error/ErrorPage';
 import { CreateIncidentPage } from 'pages/incidents/create/CreateIncidentPage';
 import { IncidentEditPage } from 'pages/incidents/edit/IncidentPage';
 import { IncidentsListPage } from 'pages/incidents/list/IncidentsListPage';
-import { IncidentPage } from 'pages/incidents/one/IncidentPage';
 import { LoginPage } from 'pages/login/LoginPage';
 import { CreateStatusPage } from 'pages/statuses/create/CreateStatusPage';
 import { StatusesPage } from 'pages/statuses/list/StatusesPage';
