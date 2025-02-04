@@ -7,7 +7,7 @@ import type { RouterType } from 'app/app-router/RouterType';
 import { AppRoutes } from 'app/app-router/app-routes';
 import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCase';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
-import { Incident } from 'shared/api/generated';
+import type { Incident } from 'shared/api/generated';
 
 export class IncidentEditPageModel {
   @observable

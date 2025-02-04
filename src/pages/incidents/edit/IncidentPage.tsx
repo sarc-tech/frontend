@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { useInject } from 'shared/utils/hooks/useInject';
+import { MyDialog } from 'widgets/MyDialog';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 import { IncidentEditPageModel } from './IncidentPageModel';
@@ -38,7 +39,7 @@ export const IncidentEditPage: FC = observer(() => {
   return (
     <SideMenuState>
       <Container>
-        <DFDialog<FormValues>
+        <MyDialog<FormValues>
           visible={true}
           initialValues={model.incident}
           headerProps={{
@@ -79,7 +80,7 @@ export const IncidentEditPage: FC = observer(() => {
             },
             {
               name: 'date',
-              type: 'text',
+              type: 'mycontrol',
               caption: 'Дата заявки',
               tooltip: 'Дата заявки',
             },
