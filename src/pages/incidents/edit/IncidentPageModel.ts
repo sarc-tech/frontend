@@ -45,7 +45,11 @@ export class IncidentEditPageModel {
   @action
   async submitForm(formValues: FormValues) {
     try {
-      await this.sarcApiClient.incidents.addIncidents(formValues);
+      const dataToSend = {
+        ...formValues,
+        statusId: formValues.statusId[0],
+      };
+      await this.sarcApiClient.incidents.updateIncidents(dataToSend);
       this.router.navigate(AppRoutes.incidents);
     } catch (error) {
       this.handleNetworkErrorUseCase.invoke(error);

@@ -74,9 +74,17 @@ export const IncidentEditPage: FC = observer(() => {
             },
             {
               name: 'statusId',
-              type: 'text',
+              type: 'select',
               caption: 'Статус',
               tooltip: 'Статус',
+              initialValue: [model.incident?.statusId!],
+              extras: {
+                width: 'max',
+                placeholder: 'Статус заявки',
+                options: model.allStatuses,
+                loading: model.allStatusesLoading,
+                hasClear: false,
+              },
             },
             {
               name: 'date',
