@@ -27,7 +27,6 @@ export class StatusesPageModel {
       const statusesResponse = await this.apiClient.statuses.getStatuses();
       runInAction(() => {
         this.statuses = statusesResponse.data;
-        console.log(this.statuses);
       });
     } catch (error) {
       this.handleNetworkErrorUseCase.invoke(error);

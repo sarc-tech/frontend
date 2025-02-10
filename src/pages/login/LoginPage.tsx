@@ -17,7 +17,7 @@ const useSmsCodeTimer = () => {
 
   const setupTimer = () => {
     intervalIdRef.current = setInterval(() => {
-      setCount((count) => count - 1);
+      setCount((countValue) => countValue - 1);
     }, ONE_SECOND_MS);
   };
 
@@ -50,7 +50,7 @@ export const LoginPage: FC = observer(() => {
         setupTimer();
         break;
     }
-  }, [model.step]);
+  }, [setupTimer, model.step]);
 
   if (authStore.isLogged) {
     return <Navigate to="/" />;

@@ -9,7 +9,6 @@ import {
   withTableSettings,
   withTableSorting,
 } from '@gravity-ui/uikit';
-import block from 'bem-cn-lite';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,17 +21,10 @@ import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 import 'pages/statuses/list/status-row.scss';
 
-interface Statuses {
-  id: string;
-  name: string;
-}
-
 const columns = [
   { id: 'id', header: 'ID', size: 50, meta: { sort: true } },
   { id: 'name', header: 'Значение', size: 150, meta: { sort: true } },
 ];
-
-const b = block('status-row');
 
 const initialSettings = [
   { id: 'id' },
@@ -82,12 +74,11 @@ export const StatusesPage: FC = observer(() => {
           columns={columns}
           data={model.statuses}
           settings={settings}
-          updateSettings={(settings) => {
-            setSettings(settings);
+          updateSettings={(updateSettings) => {
+            setSettings(updateSettings);
             return Promise.resolve();
           }}
-          getRowClassNames={(item: any, index: number) => {
-            console.log(item, index, index / 2 === 0);
+          getRowClassNames={(item: any, _: number) => {
             if (item.name.includes('s')) {
               return ['colored'];
             }
