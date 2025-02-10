@@ -9,6 +9,10 @@ import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCas
 import { SarcApiClient } from 'shared/api/SarcApiClient';
 import type { Incident } from 'shared/api/generated';
 
+// eslint-disable-next-line
+// @ts-ignore
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export class IncidentEditPageModel {
   @observable
   allStatuses: SelectOption[] = [];
@@ -50,6 +54,7 @@ export class IncidentEditPageModel {
         statusId: formValues.statusId[0],
       };
       await this.sarcApiClient.incidents.updateIncidents(dataToSend);
+      await wait(3000);
       this.router.navigate(AppRoutes.incidents);
     } catch (error) {
       this.handleNetworkErrorUseCase.invoke(error);

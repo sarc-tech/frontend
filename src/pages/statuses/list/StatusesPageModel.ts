@@ -22,11 +22,12 @@ export class StatusesPageModel {
     this.loadStatuses();
   }
 
-  private async loadStatuses() {
+  async loadStatuses() {
     try {
       const statusesResponse = await this.apiClient.statuses.getStatuses();
       runInAction(() => {
         this.statuses = statusesResponse.data;
+        console.log(this.statuses);
       });
     } catch (error) {
       this.handleNetworkErrorUseCase.invoke(error);

@@ -5,3 +5,11 @@ $block: '.status-row';
     background: var(--g-color-base-generic-hover);
   }
 }
+
+.g-table__cell {
+  text-align: center;
+}
+
+.colored {
+  background-color: #00ff00;
+}

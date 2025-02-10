@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import { Button, Flex, PinInput, Text, TextInput, spacing } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
@@ -8,11 +8,37 @@ import { AuthStore } from 'features/AuthStore';
 import { LoginPageModel } from 'pages/login/LoginPageModel';
 import { useInject } from 'shared/utils/hooks/useInject';
 
+const ONE_SECOND_MS = 1000;
+const SMS_ATTEMT_TIME_SEC = 3;
+
+const useSmsCodeTimer = () => {
+  const [count, setCount] = useState(SMS_ATTEMT_TIME_SEC);
+  const intervalIdRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+
+  const setupTimer = () => {
+    intervalIdRef.current = setInterval(() => {
+      setCount((count) => count - 1);
+    }, ONE_SECOND_MS);
+  };
+
+  useEffect(() => {
+    if (count <= 0) {
+      clearInterval(intervalIdRef.current);
+    }
+  }, [count]);
+
+  return {
+    setupTimer,
+    count, // TODO: rename
+  };
+};
+
 export const LoginPage: FC = observer(() => {
   const model = useInject(LoginPageModel);
   const authStore = useInject(AuthStore);
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const codeInputRef = useRef<HTMLInputElement>(null);
+  const { setupTimer, count } = useSmsCodeTimer();
 
   useEffect(() => {
     switch (model.step) {
@@ -21,6 +47,7 @@ export const LoginPage: FC = observer(() => {
         break;
       case 1:
         codeInputRef.current?.focus();
+        setupTimer();
         break;
     }
   }, [model.step]);
@@ -30,7 +57,7 @@ export const LoginPage: FC = observer(() => {
   }
 
   return (
-    <Flex centerContent width="100%" minHeight="100%">
+    <Flex centerContent direction="column" width="100%" minHeight="100%">
       <Flex centerContent direction="column" width="100%" maxWidth="200px" as="form">
         {model.step === 0 && (
           <>
@@ -83,12 +110,16 @@ export const LoginPage: FC = observer(() => {
               className={spacing({ mt: 4 })}
               onClick={() => model.confirmCode()}
               loading={model.loading}
-              disabled={model.code.length === 0}
+              disabled={count !== 0}
             >
               Отправить код
             </Button>
+            <p>Отправить повтоорно через: {count}</p>
           </>
         )}
+      </Flex>
+      <Flex alignItems={'flex-end'} width="100%">
+        test
       </Flex>
     </Flex>
   );

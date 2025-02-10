@@ -10,6 +10,7 @@
     "@gravity-ui/dialog-fields": "^5.0.9",
     "@gravity-ui/icons": "^2.12.0",
     "@gravity-ui/navigation": "^2.29.0",
+    "@gravity-ui/react-data-table": "^2.1.1",
     "@gravity-ui/table": "^1.7.0",
     "@gravity-ui/uikit": "^6.40.0",
     "@types/react-router-dom": "^5.3.3",

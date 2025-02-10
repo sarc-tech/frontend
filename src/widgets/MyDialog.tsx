@@ -29,7 +29,6 @@ MyControl.getDefaultValue = () => {
 // step 1
 registerDialogControl('mycontrol', MyControl);
 
-// step 2
 type MyTypedDialogField<ValuesType> = DFDialogField<
   ValuesType,
   RegisteredDialogField<'mycontrol', React.ComponentProps<typeof MyControl>, ValuesType>

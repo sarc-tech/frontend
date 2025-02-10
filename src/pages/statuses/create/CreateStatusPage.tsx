@@ -19,9 +19,9 @@ export const CreateStatusPage: FC = () => {
 
   const apiClient = useInject(SarcApiClient);
 
-  function onSubmit(values: FormApi<FormValues>) {
+  async function onSubmit(values: FormApi<FormValues>) {
     if (values.getState().submitting) {
-      apiClient.statuses.addStatus(values.getState().values);
+      await apiClient.statuses.addStatus(values.getState().values);
     }
     navigate(AppRoutes.statusesList);
   }
@@ -31,7 +31,7 @@ export const CreateStatusPage: FC = () => {
       <Container>
         <DFDialog<FormValues>
           visible={true}
-          modal={false}
+          modal={true}
           headerProps={{
             title: 'Добавить статус',
           }}
