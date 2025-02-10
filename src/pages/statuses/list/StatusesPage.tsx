@@ -71,6 +71,7 @@ export const StatusesPage: FC = observer(() => {
           Добавить новый статус модально
         </Button>
         <MyTable
+          className={'statusPageTable'}
           columns={columns}
           data={model.statuses}
           settings={settings}
