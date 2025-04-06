@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 import { useScript } from 'shared/utils/hooks/useScript';
 import { sendSuggestToken } from 'shared/utils/yandexAuth';

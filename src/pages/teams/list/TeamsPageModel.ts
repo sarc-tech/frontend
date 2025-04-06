@@ -3,7 +3,7 @@ import { makeAutoObservable, observable, runInAction } from 'mobx';
 
 import { HandleNetworkErrorUseCase } from 'features/network/HandleApiErrorUseCase';
 import { SarcApiClient } from 'shared/api/SarcApiClient';
-import { Status, Team } from 'shared/api/generated';
+import { Team } from 'shared/api/generated';
 
 export class TeamsPageModel {
   @observable

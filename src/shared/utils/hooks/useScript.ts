@@ -13,5 +13,5 @@ export const useScript = (url: string, onLoad?: () => void) => {
     return () => {
       document.body.removeChild(script);
     };
-  }, [url]);
+  }, [onLoad, url]);
 };

@@ -27,7 +27,7 @@ export const TeamPage: FC = () => {
         setStatus(res);
       });
     }
-  }, [apiClient.statuses, id]);
+  }, [apiClient.statuses, apiClient.teams, id]);
 
   function onSubmit(values: FormApi<FormValues>) {
     if (values.getState().submitting) {

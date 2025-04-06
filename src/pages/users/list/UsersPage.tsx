@@ -1,13 +1,11 @@
 import React, { FC, useState } from 'react';
 
-import { DFDialog, FormApi } from '@gravity-ui/dialog-fields';
 import { Container, Table, withTableSettings, withTableSorting } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { UsersPageModel } from 'pages/users/list/UsersPageModel';
-import { SarcApiClient } from 'shared/api/SarcApiClient';
 import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
