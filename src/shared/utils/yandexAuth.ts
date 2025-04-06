@@ -42,7 +42,7 @@ export const initYandexAuth = (onSuccess: (data: YandexAuthResponse) => void) =>
 export const sendSuggestToken = () => {
   // eslint-disable-next-line
   // @ts-ignore
-  YaSendSuggestToken('http://localhost:3010', {
+  yaSendSuggestToken('http://localhost:3010', {
     // eslint-disable-line
     flag: true,
   });
