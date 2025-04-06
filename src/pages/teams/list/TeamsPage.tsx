@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 
-import { DFDialog, FormApi } from '@gravity-ui/dialog-fields';
 import {
   Button,
   Container,
@@ -14,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
 import { TeamsPageModel } from 'pages/teams/list/TeamsPageModel';
-import { SarcApiClient } from 'shared/api/SarcApiClient';
 import { useInject } from 'shared/utils/hooks/useInject';
 import { PageHeader } from 'widgets/PageHeader';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
@@ -43,8 +41,8 @@ export const TeamsPage: FC = observer(() => {
   const MyTable = withTableSorting(withTableSettings({ width: 200, filterable: true })(Table));
   const model = useInject(TeamsPageModel);
   const [settings, setSettings] = useState(initialSettings);
-  const apiClient = useInject(SarcApiClient);
 
+  /*
   async function onSubmit(values: FormApi<FormValues>) {
     try {
       if (values.getState().submitting) {
@@ -53,6 +51,7 @@ export const TeamsPage: FC = observer(() => {
       }
     } catch {}
   }
+*/
 
   return (
     <SideMenuState>
@@ -83,7 +82,10 @@ export const TeamsPage: FC = observer(() => {
   );
 });
 
+/*
 interface FormValues {
   id: string;
   name: string;
 }
+
+ */

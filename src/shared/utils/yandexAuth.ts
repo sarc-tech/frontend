@@ -5,7 +5,7 @@ export type YandexAuthResponse = {
 };
 
 export const initYandexAuth = (onSuccess: (data: YandexAuthResponse) => void) => {
-  console.log('initYandexAuth');
+  // console.log('initYandexAuth');
   // eslint-disable-next-line
   // @ts-ignore
   YaAuthSuggest.init(
@@ -31,12 +31,13 @@ export const initYandexAuth = (onSuccess: (data: YandexAuthResponse) => void) =>
     // eslint-disable-next-line
     // @ts-ignore
     .then((data) => {
-      console.log('Сообщение с токеном', data);
+      // console.log('Сообщение с токеном', data);
       onSuccess(data);
     })
     // eslint-disable-next-line
     // @ts-ignore
-    .catch((error) => console.log('Обработка ошибки', error));
+    .catch(() => {});
+  //.catch((error) => {} console.log('Обработка ошибки', error) );
 };
 
 export const sendSuggestToken = () => {

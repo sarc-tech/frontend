@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-import { DFDialog } from '@gravity-ui/dialog-fields';
 import { Container } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
@@ -18,9 +17,11 @@ export const CreateIncidentPage: FC = observer(() => {
   const navigate = useNavigate();
   const model = useInject(CreateIncidentPageModel);
 
+  /*
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.files);
   };
+*/
 
   return (
     <SideMenuState>
