@@ -23,7 +23,13 @@ import 'pages/statuses/list/status-row.scss';
 
 const columns = [
   { id: 'id', header: 'ID', size: 50, meta: { sort: true } },
-  { id: 'name', header: 'Значение', size: 150, meta: { sort: true } },
+  {
+    id: 'name',
+    header: 'Значение',
+    size: 150,
+    className: 'lineBrake',
+    meta: { sort: true, name: 'name' },
+  },
 ];
 
 const initialSettings = [

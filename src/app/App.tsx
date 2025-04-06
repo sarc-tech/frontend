@@ -9,6 +9,8 @@ import { AppThemeProvider } from 'widgets/app-theme-provider/AppThemeProvider';
 
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
+// eslint-disable-next-line
+import '@dynamicApp/styles.css';
 import 'app/global-styles/globals.scss';
 
 export const App: FC = () => {

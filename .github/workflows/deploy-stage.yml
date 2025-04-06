@@ -23,7 +23,7 @@ jobs:
         run: npm run build
 
       # Дока по экшну: https://github.com/marketplace/actions/yandex-cloud-object-storage-upload-s3
-      - uses: MrMeison/yc-object-storage-action@main
+      - uses: MrMeison/yc-object-storage-action@1.2.1
         with:
           accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
           secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}

@@ -4,10 +4,24 @@
 /* eslint-disable */
 export type User = {
   /**
-   * incident id
+   * user id
    */
   id: string;
-  fio: string;
+  /**
+   * yandex id
+   */
+  yandexId: string;
+  surname?: string;
+  name: string;
+  patronymic?: string;
+  callSign?: string;
+  gender?: string;
+  birthdate?: string;
+  vk?: string;
+  telegram?: string;
+  email?: string;
+  phone?: string;
+  approval: boolean;
   role: string;
 };
 

@@ -27,8 +27,8 @@
     "reflect-metadata": "^0.2.2"
   },
   "scripts": {
-    "start": "export NODE_OPTIONS=--openssl-legacy-provider && craco start",
-    "build": "craco build",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && export APP_NAME=./src/app/app1 && craco start",
+    "build": "export APP_NAME=./src/app/app1 && craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "prepare": "husky install",

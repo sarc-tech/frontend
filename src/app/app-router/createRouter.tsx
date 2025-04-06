@@ -13,6 +13,12 @@ import { LoginPage } from 'pages/login/LoginPage';
 import { CreateStatusPage } from 'pages/statuses/create/CreateStatusPage';
 import { StatusesPage } from 'pages/statuses/list/StatusesPage';
 import { StatusPage } from 'pages/statuses/one/StatusPage';
+import { CreateTeamPage } from 'pages/teams/create/CreateTeamPage';
+import { TeamsPage } from 'pages/teams/list/TeamsPage';
+import { TeamPage } from 'pages/teams/one/TeamPage';
+import { UsersPage } from 'pages/users/list/UsersPage';
+import { UserPage } from 'pages/users/one/UserPage';
+import { YandexTokenPage } from 'pages/yandex-token/YandexTokenPage';
 
 export function createRouter(): RouterType {
   return createBrowserRouter([
@@ -31,6 +37,10 @@ export function createRouter(): RouterType {
         {
           path: AppRoutes.login,
           element: <LoginPage />,
+        },
+        {
+          path: AppRoutes.yandexToken,
+          element: <YandexTokenPage />,
         },
         {
           path: AppRoutes.calls,
@@ -65,6 +75,30 @@ export function createRouter(): RouterType {
           ),
         },
         {
+          path: AppRoutes.teamsList,
+          element: (
+            <ProtectedRoute>
+              <TeamsPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: AppRoutes.team.template,
+          element: (
+            <ProtectedRoute>
+              <TeamPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: AppRoutes.teamsAdd,
+          element: (
+            <ProtectedRoute>
+              <CreateTeamPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
           path: AppRoutes.statusesList,
           element: (
             <ProtectedRoute>
@@ -85,6 +119,30 @@ export function createRouter(): RouterType {
           element: (
             <ProtectedRoute>
               <CreateStatusPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: AppRoutes.usersList,
+          element: (
+            <ProtectedRoute>
+              <UsersPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: AppRoutes.users.template,
+          element: (
+            <ProtectedRoute>
+              <UserPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: AppRoutes.userEdit,
+          element: (
+            <ProtectedRoute>
+              <UserPage />
             </ProtectedRoute>
           ),
         },

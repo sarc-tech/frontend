@@ -70,7 +70,7 @@ export class LoginPageModel {
     this.formError = null;
 
     try {
-      await this.apiClient.users.sendSms(this.phone);
+      // await this.apiClient.users.sendSms(this.phone);
       runInAction(() => {
         this.step = 1;
       });
@@ -86,8 +86,8 @@ export class LoginPageModel {
   async confirmCode() {
     this.loading = true;
     try {
-      const tokenResponse = await this.apiClient.users.checkSms(this.phone, this.code.join(''));
-      this.authStore.setToken(tokenResponse.token);
+      // const tokenResponse = await this.apiClient.users.checkSms(this.phone, this.code.join(''));
+      // this.authStore.setToken(tokenResponse.token);
     } catch (error) {
       this.handleNetworkErrorUseCase.invoke(error);
     }

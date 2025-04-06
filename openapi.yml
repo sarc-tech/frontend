@@ -9,17 +9,18 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.0.11
+  version: 0.0.17
 externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
   - url: https://d5drbh6fis58kjvm332b.g3ab4gln.apigw.yandexcloud.net
-  - url: https://bbasntee4s9pbtmrrvb1.containers.yandexcloud.net 
   - url: http://localhost:8082
 security:
-  - bearerAuth: []  
+  - bearerAuth: []
 tags:
+  - name: teams
+    description: Работа со отрядами
   - name: statuses
     description: Работа со статусами заявок
   - name: incidents
@@ -30,6 +31,127 @@ tags:
   - name: users
     description: работа с пользователями
 paths:
+  /teams:
+    x-ogen-operation-group: Teams
+    put:
+      tags:
+        - teams
+      summary: Обновление существующего отряда
+      description: Update an existing team by Id
+      operationId: updateTeam
+      requestBody:
+        description: Update an existent team in the system
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Team'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Ошибочный ID отряда
+        '404':
+          description: Отряд не найден
+        '422':
+          description: Validation exception
+    post:
+      tags:
+        - teams
+      summary: добавление нового отряда
+      description: Add a new team
+      operationId: addTeam
+      requestBody:
+        description: Add a new team
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Team'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Team'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+    get:
+      tags:
+        - teams
+      summary: получение списка отрядов
+      description: list of teams
+      operationId: getTeams
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamsResponse'
+        '400':
+          description: Invalid value
+  /teams/{teamId}:
+    x-ogen-operation-group: Teams
+    get:
+      tags:
+        - teams
+      summary: получение отряда по id
+      description: Returns a single tems
+      operationId: getTemsById
+      parameters:
+        - name: teamId
+          in: path
+          description: ID of Team to return
+          required: true
+          schema:
+            type: string
+            description: team id
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          description: Invalid ID
+        '404':
+          description: Team not found
+    delete:
+      tags:
+        - teams
+      summary: Deletes an team
+      description: delete an team
+      operationId: deleteTeam
+      parameters:
+        - name: teamId
+          in: path
+          description: request id to delete
+          required: true
+          schema:
+            type: string
+            description: team id
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid value
+
+
   /statuses:
     x-ogen-operation-group: Statuses
     put:
@@ -84,9 +206,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Status'
         '400':
           description: Invalid input
         '422':
@@ -129,11 +248,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Status'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Status'
         '400':
-          description: Invalid ID 
+          description: Invalid ID
         '404':
           description: Incidents not found
 
@@ -156,10 +272,6 @@ paths:
           description: successful operation
         '400':
           description: Invalid value
-          
-          
-          
-          
   /incidents:
     x-ogen-operation-group: Incidents
     put:
@@ -214,9 +326,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Incident'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Incident'
         '400':
           description: Invalid input
         '422':
@@ -259,11 +368,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Incident'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Incident'
         '400':
-          description: Invalid ID 
+          description: Invalid ID
         '404':
           description: Incidents not found
 
@@ -302,89 +408,165 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
         '400':
-          description: Invalid user 
+          description: Invalid user
         '404':
           description: user not found
-  /checksms:
-    x-ogen-operation-group: Users
-    post:
-      security: []
+    put:
       tags:
         - users
-      summary: Получение токена
-      description: Returns a token
-      operationId: CheckSms
-      parameters:
-        - name: phone
-          in: query
-          description: phone of user
-          required: true
-          schema:
-            type: string
-            description: phone
-        - name: sms
-          in: query
-          description: sms
-          required: true
-          schema:
-            type: string
-            description: sms     
+      summary: Обновление текущего пользователя
+      description: Update a user
+      operationId: updateUser
+      requestBody:
+        description: Update an existent user in the system
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Token'
+                $ref: '#/components/schemas/User'
         '400':
-          description: Invalid param 
+          description: Invalid user
         '404':
-          description: check error 
-  /sendsms/{phone}:
+          description: user not found
+  /user/{userId}:
+    x-ogen-operation-group: Users
+    get:
+      tags:
+        - users
+      summary: получение пользователя по id
+      description: Returns a user
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: ID of User to return
+          required: true
+          schema:
+            type: string
+            description: user id
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid user
+        '404':
+          description: user not found
+  /users:
+    x-ogen-operation-group: Users
+    get:
+      tags:
+        - users
+      summary: получение списка пользователей
+      description: Returns a users
+      operationId: getUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+        '400':
+          description: Invalid user
+        '404':
+          description: user not found
+  /checkuser/{token}:
     x-ogen-operation-group: Users
     post:
       security: []
       tags:
         - users
-      summary: Отправка СМС
-      description: Returns a token
-      operationId: SendSms
+      summary: Получение токена
+      description: Returns a user
+      operationId: CheckUser
       parameters:
-        - name: phone
+        - name: token
           in: path
-          description: phone of user
+          description: token of yandex
           required: true
           schema:
             type: string
-            description: phone
+            description: token
       responses:
         '200':
           description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
         '400':
-          description: Invalid param 
+          description: Invalid user
         '404':
-          description: check error 
+          description: user not found
   /logout:
     x-ogen-operation-group: Users
     post:
       tags:
         - users
       summary: Выход из акаунта
-      description: Удаляет сессию пользователя 
+      description: Удаляет сессию пользователя
       operationId: Logout
       responses:
         '200':
           description: successful operation
         '400':
-          description: Invalid param 
+          description: Invalid param
         '404':
-          description: check error 
+          description: check error
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
   schemas:
+    Team:
+      required:
+        - id
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          example: 123
+          description: team id
+        name:
+          type: string
+          example: Новая
+        isGroup:
+          type: boolean
+        groupId:
+          type: string
+          example: 123
+          description: team id
+        isDeleted:
+          type: boolean
+    TeamsResponse:
+      required:
+        - trackingId
+        - status
+        - data
+      type: object
+      properties:
+        trackingId:
+          type: string
+        status:
+          type: string
+          default: Ok
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Team"
     Status:
       required:
         - id
@@ -443,29 +625,72 @@ components:
     User:
       required:
         - id
-        - fio
+        - yandexId
+        - name
+        - approval
         - role
       type: object
       properties:
         id:
           type: string
           example: 123
-          description: incident id
-        fio:
+          description: user id
+        yandexId:
           type: string
-          example: Иванов Иван Иванович
+          example: 123
+          description: yandex id
+        surname:
+          type: string
+          example: Иванов
+        name:
+          type: string
+          example: Иван
+        patronymic:
+          type: string
+          example: Иванович
+        callSign:
+          type: string
+          example: Борзый
+        gender:
+          type: string
+          example: female
+        birthdate:
+          type: string
+          format: date
+          example: '2022-02-22'
+        vk:
+          type: string
+          example:
+        telegram:
+          type: string
+          example:
+        email:
+          type: string
+          example:
+        phone:
+          type: string
+          example:
+        approval:
+          type: boolean
         role:
           type: string
           example: Admin
-    Token:
+    UsersResponse:
       required:
-        - token
+        - trackingId
+        - status
+        - data
       type: object
       properties:
-        token:
+        trackingId:
           type: string
-          example: 123
-          description: token
+        status:
+          type: string
+          default: Ok
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
     IncidentsResponse:
       required:
         - trackingId

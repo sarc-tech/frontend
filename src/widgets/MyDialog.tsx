@@ -22,16 +22,37 @@ export function MyControl(props: { value: string; onChange: (value: string, opts
   );
 }
 
+export function FileInput(props: {
+  value: React.ChangeEvent<HTMLInputElement>;
+  onChange: (value: React.ChangeEvent<HTMLInputElement>, opts?: any) => void;
+}) {
+  return (
+    <input
+      type="file"
+      onChange={(e) => {
+        props.onChange(e);
+      }}
+    />
+  );
+}
+
 MyControl.getDefaultValue = () => {
+  return null;
+};
+
+FileInput.getDefaultValue = () => {
   return null;
 };
 
 // step 1
 registerDialogControl('mycontrol', MyControl);
 
+registerDialogControl('fileinput', FileInput);
+
 type MyTypedDialogField<ValuesType> = DFDialogField<
   ValuesType,
-  RegisteredDialogField<'mycontrol', React.ComponentProps<typeof MyControl>, ValuesType>
+  | RegisteredDialogField<'mycontrol', React.ComponentProps<typeof MyControl>, ValuesType>
+  | RegisteredDialogField<'fileinput', React.ComponentProps<typeof FileInput>, ValuesType>
 >;
 
 // step 3

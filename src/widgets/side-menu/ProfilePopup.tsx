@@ -48,10 +48,14 @@ export const ProfilePopup: FC<Props> = observer((props) => {
         style={{ boxSizing: 'border-box' }}
       >
         <User
-          name={<Text variant={'subheader-3'}>Boris Petrov</Text>}
-          description={'boris@yandex.ru'}
+          name={
+            <Text variant={'subheader-3'}>
+              {authStore.loggedUser?.name + ' ' + authStore.loggedUser?.surname}
+            </Text>
+          }
+          description={authStore.loggedUser?.email}
           size={'l'}
-          avatar={{ text: 'Boris Petrov' }}
+          avatar={{ text: authStore.loggedUser?.name + ' ' + authStore.loggedUser?.surname }}
           style={{ minWidth: 0 }}
         />
         <Button

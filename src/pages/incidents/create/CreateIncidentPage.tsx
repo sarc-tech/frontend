@@ -11,16 +11,21 @@ import {
   FormValues,
 } from 'pages/incidents/create/CreateIncidentPageModel';
 import { useInject } from 'shared/utils/hooks/useInject';
+import { MyDialog } from 'widgets/MyDialog';
 import { SideMenuState } from 'widgets/side-menu/SideMenuState';
 
 export const CreateIncidentPage: FC = observer(() => {
   const navigate = useNavigate();
   const model = useInject(CreateIncidentPageModel);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+  };
+
   return (
     <SideMenuState>
       <Container>
-        <DFDialog<FormValues>
+        <MyDialog<FormValues>
           visible={true}
           modal={false}
           headerProps={{
@@ -76,6 +81,12 @@ export const CreateIncidentPage: FC = observer(() => {
               type: 'text',
               caption: 'Дата заявки',
               tooltip: 'Дата заявки',
+            },
+            {
+              name: 'file1',
+              type: 'fileinput',
+              caption: 'Файл согласия',
+              tooltip: 'Нужно прикрепить файл',
             },
           ]}
         />

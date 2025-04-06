@@ -1,0 +1,7 @@
+$block: '.user-row';
+
+#{$block} {
+  &:hover {
+    background: var(--g-color-base-generic-hover);
+  }
+}

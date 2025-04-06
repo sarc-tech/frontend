@@ -10,6 +10,11 @@ $block: '.status-row';
   text-align: center;
 }
 
+.statusPageTable .lineBrake {
+  white-space: unset;
+  word-spacing: 100vw;
+}
+
 .colored {
   background-color: #00ff00;
 }

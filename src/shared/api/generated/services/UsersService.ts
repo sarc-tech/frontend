@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Token } from '../models/Token';
 import type { User } from '../models/User';
+import type { UsersResponse } from '../models/UsersResponse';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class UsersService {
@@ -25,49 +25,83 @@ export class UsersService {
     });
   }
   /**
-   * Получение токена
-   * Returns a token
-   * @param phone phone of user
-   * @param sms sms
-   * @returns Token successful operation
+   * Обновление текущего пользователя
+   * Update a user
+   * @param requestBody Update an existent user in the system
+   * @returns User successful operation
    * @throws ApiError
    */
-  public checkSms(
-    phone: string,
-    sms: string,
-  ): CancelablePromise<Token> {
+  public updateUser(
+    requestBody: User,
+  ): CancelablePromise<User> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/checksms',
-      query: {
-        'phone': phone,
-        'sms': sms,
-      },
+      method: 'PUT',
+      url: '/user',
+      body: requestBody,
+      mediaType: 'application/json',
       errors: {
-        400: `Invalid param`,
-        404: `check error`,
+        400: `Invalid user`,
+        404: `user not found`,
       },
     });
   }
   /**
-   * Отправка СМС
-   * Returns a token
-   * @param phone phone of user
-   * @returns any successful operation
+   * получение пользователя по id
+   * Returns a user
+   * @param userId ID of User to return
+   * @returns User successful operation
    * @throws ApiError
    */
-  public sendSms(
-    phone: string,
-  ): CancelablePromise<any> {
+  public getUserById(
+    userId: string,
+  ): CancelablePromise<User> {
     return this.httpRequest.request({
-      method: 'POST',
-      url: '/sendsms/{phone}',
+      method: 'GET',
+      url: '/user/{userId}',
       path: {
-        'phone': phone,
+        'userId': userId,
       },
       errors: {
-        400: `Invalid param`,
-        404: `check error`,
+        400: `Invalid user`,
+        404: `user not found`,
+      },
+    });
+  }
+  /**
+   * получение списка пользователей
+   * Returns a users
+   * @returns UsersResponse successful operation
+   * @throws ApiError
+   */
+  public getUsers(): CancelablePromise<UsersResponse> {
+    return this.httpRequest.request({
+      method: 'GET',
+      url: '/users',
+      errors: {
+        400: `Invalid user`,
+        404: `user not found`,
+      },
+    });
+  }
+  /**
+   * Получение токена
+   * Returns a user
+   * @param token token of yandex
+   * @returns User successful operation
+   * @throws ApiError
+   */
+  public checkUser(
+    token: string,
+  ): CancelablePromise<User> {
+    return this.httpRequest.request({
+      method: 'POST',
+      url: '/checkuser/{token}',
+      path: {
+        'token': token,
+      },
+      errors: {
+        400: `Invalid user`,
+        404: `user not found`,
       },
     });
   }

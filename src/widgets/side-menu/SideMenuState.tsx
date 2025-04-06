@@ -1,12 +1,14 @@
 import { FC, ReactNode } from 'react';
 
-import { DisplayPulse, LayoutList } from '@gravity-ui/icons';
+import { DisplayPulse, LayoutList, Persons, PersonsLock } from '@gravity-ui/icons';
 import { AsideHeader, FooterItem } from '@gravity-ui/navigation';
 import { Avatar } from '@gravity-ui/uikit';
 import { observer } from 'mobx-react-lite';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'app/app-router/app-routes';
+import { AuthStore } from 'features/AuthStore';
+import { useInject } from 'shared/utils/hooks/useInject';
 import { ProfilePopup, useProfilePopupState } from 'widgets/side-menu/ProfilePopup';
 import { sideMenuState } from 'widgets/side-menu/side-menu-store';
 
@@ -34,6 +36,7 @@ export const SideMenuState: FC<Props> = observer((props) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const profilePopupState = useProfilePopupState();
+  const authStore = useInject(AuthStore);
 
   return (
     <AsideHeader
@@ -61,7 +64,22 @@ export const SideMenuState: FC<Props> = observer((props) => {
           title: 'Статусы',
           icon: LayoutList,
         },
+        {
+          id: AppRoutes.usersList,
+          current: isMatchingPath(AppRoutes.usersList, pathname),
+          onItemClick: () => navigate(AppRoutes.usersList),
+          title: 'Пользователи',
+          icon: Persons,
+        },
+        {
+          id: AppRoutes.teamsList,
+          current: isMatchingPath(AppRoutes.teamsList, pathname),
+          onItemClick: () => navigate(AppRoutes.teamsList),
+          title: 'Отряды',
+          icon: PersonsLock,
+        },
       ]}
+      //AsideHeaderFooterItem={}
       headerDecoration={true}
       renderContent={() => (
         <>
@@ -71,26 +89,33 @@ export const SideMenuState: FC<Props> = observer((props) => {
       )}
       renderFooter={() => {
         return (
-          <FooterItem
-            compact={sideMenuState.compact}
-            item={{
-              id: 'exit',
-              onItemClick: () => {
-                profilePopupState.toggle();
-              },
-              title: '', // переопределяется ниже
-              itemWrapper: (_, makeItem) => {
-                return (
-                  <div ref={profilePopupState.ref}>
-                    {makeItem({
-                      icon: <Avatar text={'Boris Petrov'} size="m" />,
-                      title: 'Boris Petrov',
-                    })}
-                  </div>
-                );
-              },
-            }}
-          />
+          <>
+            <FooterItem
+              compact={sideMenuState.compact}
+              item={{
+                id: 'exit',
+                onItemClick: () => {
+                  profilePopupState.toggle();
+                },
+                title: '', // переопределяется ниже
+                itemWrapper: (_, makeItem) => {
+                  return (
+                    <div ref={profilePopupState.ref}>
+                      {makeItem({
+                        icon: (
+                          <Avatar
+                            text={authStore.loggedUser?.name + ' ' + authStore.loggedUser?.surname}
+                            size="m"
+                          />
+                        ),
+                        title: authStore.loggedUser?.name + ' ' + authStore.loggedUser?.surname,
+                      })}
+                    </div>
+                  );
+                },
+              }}
+            />
+          </>
         );
       }}
     />

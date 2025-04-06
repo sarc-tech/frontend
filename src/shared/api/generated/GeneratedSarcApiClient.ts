@@ -7,17 +7,19 @@ import type { OpenAPIConfig } from './core/OpenAPI';
 import { FetchHttpRequest } from './core/FetchHttpRequest';
 import { IncidentsService } from './services/IncidentsService';
 import { StatusesService } from './services/StatusesService';
+import { TeamsService } from './services/TeamsService';
 import { UsersService } from './services/UsersService';
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 export class GeneratedSarcApiClient {
   public readonly incidents: IncidentsService;
   public readonly statuses: StatusesService;
+  public readonly teams: TeamsService;
   public readonly users: UsersService;
   public readonly request: BaseHttpRequest;
   constructor(config?: Partial<OpenAPIConfig>, HttpRequest: HttpRequestConstructor = FetchHttpRequest) {
     this.request = new HttpRequest({
       BASE: config?.BASE ?? 'https://d5drbh6fis58kjvm332b.g3ab4gln.apigw.yandexcloud.net',
-      VERSION: config?.VERSION ?? '0.0.11',
+      VERSION: config?.VERSION ?? '0.0.17',
       WITH_CREDENTIALS: config?.WITH_CREDENTIALS ?? false,
       CREDENTIALS: config?.CREDENTIALS ?? 'include',
       TOKEN: config?.TOKEN,
@@ -28,6 +30,7 @@ export class GeneratedSarcApiClient {
     });
     this.incidents = new IncidentsService(this.request);
     this.statuses = new StatusesService(this.request);
+    this.teams = new TeamsService(this.request);
     this.users = new UsersService(this.request);
   }
 }
